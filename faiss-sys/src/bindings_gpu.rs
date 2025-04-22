@@ -23,6 +23,7 @@ pub type FaissRangeSearchResult = FaissRangeSearchResult_H;
 pub struct FaissIDSelector_H {
     _unused: [u8; 0],
 }
+#[doc = " Encapsulates a set of ids to remove."]
 pub type FaissIDSelector = FaissIDSelector_H;
 #[doc = "< maximum inner product search"]
 pub const FaissMetricType_METRIC_INNER_PRODUCT: FaissMetricType = 0;
@@ -62,26 +63,34 @@ unsafe extern "C" {
 pub struct FaissIndex_H {
     _unused: [u8; 0],
 }
+#[doc = " Opaque type for referencing to an index object"]
 pub type FaissIndex = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Opaque type for referencing to an index object"]
     pub fn faiss_Index_free(obj: *mut FaissIndex);
 }
 unsafe extern "C" {
+    #[doc = " Getter for d"]
     pub fn faiss_Index_d(arg1: *const FaissIndex) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for is_trained"]
     pub fn faiss_Index_is_trained(arg1: *const FaissIndex) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for ntotal"]
     pub fn faiss_Index_ntotal(arg1: *const FaissIndex) -> idx_t;
 }
 unsafe extern "C" {
+    #[doc = " Getter for metric_type"]
     pub fn faiss_Index_metric_type(arg1: *const FaissIndex) -> FaissMetricType;
 }
 unsafe extern "C" {
+    #[doc = " Getter for metric_type"]
     pub fn faiss_Index_verbose(arg1: *const FaissIndex) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for metric_type"]
     pub fn faiss_Index_set_verbose(arg1: *mut FaissIndex, arg2: ::std::os::raw::c_int);
 }
 unsafe extern "C" {
@@ -230,8 +239,10 @@ unsafe extern "C" {
 pub struct FaissParameterRange_H {
     _unused: [u8; 0],
 }
+#[doc = " possible values of a parameter, sorted from least to most expensive/accurate"]
 pub type FaissParameterRange = FaissParameterRange_H;
 unsafe extern "C" {
+    #[doc = " possible values of a parameter, sorted from least to most expensive/accurate"]
     pub fn faiss_ParameterRange_name(
         arg1: *const FaissParameterRange,
     ) -> *const ::std::os::raw::c_char;
@@ -249,8 +260,10 @@ unsafe extern "C" {
 pub struct FaissParameterSpace_H {
     _unused: [u8; 0],
 }
+#[doc = " Uses a-priori knowledge on the Faiss indexes to extract tunable parameters."]
 pub type FaissParameterSpace = FaissParameterSpace_H;
 unsafe extern "C" {
+    #[doc = " Uses a-priori knowledge on the Faiss indexes to extract tunable parameters."]
     pub fn faiss_ParameterSpace_free(obj: *mut FaissParameterSpace);
 }
 unsafe extern "C" {
@@ -307,222 +320,40 @@ unsafe extern "C" {
         arg3: *mut *mut FaissParameterRange,
     ) -> ::std::os::raw::c_int;
 }
-#[doc = " Class for the clustering parameters. Can be passed to the\n constructor of the Clustering object."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct FaissClusteringParameters {
-    #[doc = "< clustering iterations"]
-    pub niter: ::std::os::raw::c_int,
-    #[doc = "< redo clustering this many times and keep best"]
-    pub nredo: ::std::os::raw::c_int,
-    #[doc = "< (bool)"]
-    pub verbose: ::std::os::raw::c_int,
-    #[doc = "< (bool) do we want normalized centroids?"]
-    pub spherical: ::std::os::raw::c_int,
-    #[doc = "< (bool) round centroids coordinates to integer"]
-    pub int_centroids: ::std::os::raw::c_int,
-    #[doc = "< (bool) update index after each iteration?"]
-    pub update_index: ::std::os::raw::c_int,
-    #[doc = "< (bool) use the centroids provided as input and do\n< not change them during iterations"]
-    pub frozen_centroids: ::std::os::raw::c_int,
-    #[doc = "< otherwise you get a warning"]
-    pub min_points_per_centroid: ::std::os::raw::c_int,
-    #[doc = "< to limit size of dataset"]
-    pub max_points_per_centroid: ::std::os::raw::c_int,
-    #[doc = "< seed for the random number generator"]
-    pub seed: ::std::os::raw::c_int,
-    #[doc = "< how many vectors at a time to decode"]
-    pub decode_block_size: usize,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FaissClusteringParameters"]
-        [::std::mem::size_of::<FaissClusteringParameters>() - 48usize];
-    ["Alignment of FaissClusteringParameters"]
-        [::std::mem::align_of::<FaissClusteringParameters>() - 8usize];
-    ["Offset of field: FaissClusteringParameters::niter"]
-        [::std::mem::offset_of!(FaissClusteringParameters, niter) - 0usize];
-    ["Offset of field: FaissClusteringParameters::nredo"]
-        [::std::mem::offset_of!(FaissClusteringParameters, nredo) - 4usize];
-    ["Offset of field: FaissClusteringParameters::verbose"]
-        [::std::mem::offset_of!(FaissClusteringParameters, verbose) - 8usize];
-    ["Offset of field: FaissClusteringParameters::spherical"]
-        [::std::mem::offset_of!(FaissClusteringParameters, spherical) - 12usize];
-    ["Offset of field: FaissClusteringParameters::int_centroids"]
-        [::std::mem::offset_of!(FaissClusteringParameters, int_centroids) - 16usize];
-    ["Offset of field: FaissClusteringParameters::update_index"]
-        [::std::mem::offset_of!(FaissClusteringParameters, update_index) - 20usize];
-    ["Offset of field: FaissClusteringParameters::frozen_centroids"]
-        [::std::mem::offset_of!(FaissClusteringParameters, frozen_centroids) - 24usize];
-    ["Offset of field: FaissClusteringParameters::min_points_per_centroid"]
-        [::std::mem::offset_of!(FaissClusteringParameters, min_points_per_centroid) - 28usize];
-    ["Offset of field: FaissClusteringParameters::max_points_per_centroid"]
-        [::std::mem::offset_of!(FaissClusteringParameters, max_points_per_centroid) - 32usize];
-    ["Offset of field: FaissClusteringParameters::seed"]
-        [::std::mem::offset_of!(FaissClusteringParameters, seed) - 36usize];
-    ["Offset of field: FaissClusteringParameters::decode_block_size"]
-        [::std::mem::offset_of!(FaissClusteringParameters, decode_block_size) - 40usize];
-};
-unsafe extern "C" {
-    #[doc = " Sets the ClusteringParameters object with reasonable defaults"]
-    pub fn faiss_ClusteringParameters_init(params: *mut FaissClusteringParameters);
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct FaissClustering_H {
-    _unused: [u8; 0],
-}
-pub type FaissClustering = FaissClustering_H;
-unsafe extern "C" {
-    pub fn faiss_Clustering_niter(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_nredo(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_verbose(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_spherical(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_int_centroids(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_update_index(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_frozen_centroids(arg1: *const FaissClustering)
-        -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_min_points_per_centroid(
-        arg1: *const FaissClustering,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_max_points_per_centroid(
-        arg1: *const FaissClustering,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_seed(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_decode_block_size(arg1: *const FaissClustering) -> usize;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_d(arg1: *const FaissClustering) -> usize;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_k(arg1: *const FaissClustering) -> usize;
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct FaissClusteringIterationStats_H {
-    _unused: [u8; 0],
-}
-pub type FaissClusteringIterationStats = FaissClusteringIterationStats_H;
-unsafe extern "C" {
-    pub fn faiss_ClusteringIterationStats_obj(arg1: *const FaissClusteringIterationStats) -> f32;
-}
-unsafe extern "C" {
-    pub fn faiss_ClusteringIterationStats_time(arg1: *const FaissClusteringIterationStats) -> f64;
-}
-unsafe extern "C" {
-    pub fn faiss_ClusteringIterationStats_time_search(
-        arg1: *const FaissClusteringIterationStats,
-    ) -> f64;
-}
-unsafe extern "C" {
-    pub fn faiss_ClusteringIterationStats_imbalance_factor(
-        arg1: *const FaissClusteringIterationStats,
-    ) -> f64;
-}
-unsafe extern "C" {
-    pub fn faiss_ClusteringIterationStats_nsplit(
-        arg1: *const FaissClusteringIterationStats,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " getter for centroids (size = k * d)"]
-    pub fn faiss_Clustering_centroids(
-        clustering: *mut FaissClustering,
-        centroids: *mut *mut f32,
-        size: *mut usize,
-    );
-}
-unsafe extern "C" {
-    #[doc = " getter for iteration stats"]
-    pub fn faiss_Clustering_iteration_stats(
-        clustering: *mut FaissClustering,
-        iteration_stats: *mut *mut FaissClusteringIterationStats,
-        size: *mut usize,
-    );
-}
-unsafe extern "C" {
-    #[doc = " the only mandatory parameters are k and d"]
-    pub fn faiss_Clustering_new(
-        p_clustering: *mut *mut FaissClustering,
-        d: ::std::os::raw::c_int,
-        k: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_new_with_params(
-        p_clustering: *mut *mut FaissClustering,
-        d: ::std::os::raw::c_int,
-        k: ::std::os::raw::c_int,
-        cp: *const FaissClusteringParameters,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_train(
-        clustering: *mut FaissClustering,
-        n: idx_t,
-        x: *const f32,
-        index: *mut FaissIndex,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_Clustering_free(clustering: *mut FaissClustering);
-}
-unsafe extern "C" {
-    #[doc = " simplified interface\n\n @param d dimension of the data\n @param n nb of training vectors\n @param k nb of output centroids\n @param x training set (size n * d)\n @param centroids output centroids (size k * d)\n @param q_error final quantization error\n @return error code"]
-    pub fn faiss_kmeans_clustering(
-        d: usize,
-        n: usize,
-        k: usize,
-        x: *const f32,
-        centroids: *mut f32,
-        q_error: *mut f32,
-    ) -> ::std::os::raw::c_int;
-}
+pub type FILE = __BindgenOpaqueArray<u64, 27usize>;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct FaissIndexBinary_H {
     _unused: [u8; 0],
 }
+#[doc = " Opaque type for referencing to a binary index object"]
 pub type FaissIndexBinary = FaissIndexBinary_H;
 unsafe extern "C" {
+    #[doc = " Opaque type for referencing to a binary index object"]
     pub fn faiss_IndexBinary_free(obj: *mut FaissIndexBinary);
 }
 unsafe extern "C" {
+    #[doc = " Getter for d"]
     pub fn faiss_IndexBinary_d(arg1: *const FaissIndexBinary) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for is_trained"]
     pub fn faiss_IndexBinary_is_trained(arg1: *const FaissIndexBinary) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for ntotal"]
     pub fn faiss_IndexBinary_ntotal(arg1: *const FaissIndexBinary) -> idx_t;
 }
 unsafe extern "C" {
+    #[doc = " Getter for metric_type"]
     pub fn faiss_IndexBinary_metric_type(arg1: *const FaissIndexBinary) -> FaissMetricType;
 }
 unsafe extern "C" {
+    #[doc = " Getter for metric_type"]
     pub fn faiss_IndexBinary_verbose(arg1: *const FaissIndexBinary) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for metric_type"]
     pub fn faiss_IndexBinary_set_verbose(arg1: *mut FaissIndexBinary, arg2: ::std::os::raw::c_int);
 }
 unsafe extern "C" {
@@ -610,197 +441,244 @@ unsafe extern "C" {
         recons: *mut u8,
     ) -> ::std::os::raw::c_int;
 }
-pub type FaissIndexFlat = FaissIndex_H;
 unsafe extern "C" {
-    #[doc = " Opaque type for IndexFlat"]
-    pub fn faiss_IndexFlat_new(p_index: *mut *mut FaissIndexFlat) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlat_new_with(
-        p_index: *mut *mut FaissIndexFlat,
-        d: idx_t,
-        metric: FaissMetricType,
+    #[doc = " Clone an index. This is equivalent to `faiss::clone_index`"]
+    pub fn faiss_clone_index(
+        arg1: *const FaissIndex,
+        p_out: *mut *mut FaissIndex,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    #[doc = " get a pointer to the index's internal data (the `xb` field). The outputs\n become invalid after any data addition or removal operation.\n\n @param index   opaque pointer to index object\n @param p_xb    output, the pointer to the beginning of `xb`.\n @param p_size  output, the current size of `sb` in number of float values."]
-    pub fn faiss_IndexFlat_xb(index: *mut FaissIndexFlat, p_xb: *mut *mut f32, p_size: *mut usize);
+    #[doc = " Clone a binary index. This is equivalent to `faiss::clone_index_binary`"]
+    pub fn faiss_clone_index_binary(
+        arg1: *const FaissIndexBinary,
+        p_out: *mut *mut FaissIndexBinary,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Class for the clustering parameters. Can be passed to the\n constructor of the Clustering object."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissClusteringParameters {
+    #[doc = "< clustering iterations"]
+    pub niter: ::std::os::raw::c_int,
+    #[doc = "< redo clustering this many times and keep best"]
+    pub nredo: ::std::os::raw::c_int,
+    #[doc = "< (bool)"]
+    pub verbose: ::std::os::raw::c_int,
+    #[doc = "< (bool) do we want normalized centroids?"]
+    pub spherical: ::std::os::raw::c_int,
+    #[doc = "< (bool) round centroids coordinates to integer"]
+    pub int_centroids: ::std::os::raw::c_int,
+    #[doc = "< (bool) update index after each iteration?"]
+    pub update_index: ::std::os::raw::c_int,
+    #[doc = "< (bool) use the centroids provided as input and do\n< not change them during iterations"]
+    pub frozen_centroids: ::std::os::raw::c_int,
+    #[doc = "< otherwise you get a warning"]
+    pub min_points_per_centroid: ::std::os::raw::c_int,
+    #[doc = "< to limit size of dataset"]
+    pub max_points_per_centroid: ::std::os::raw::c_int,
+    #[doc = "< seed for the random number generator"]
+    pub seed: ::std::os::raw::c_int,
+    #[doc = "< how many vectors at a time to decode"]
+    pub decode_block_size: usize,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of FaissClusteringParameters"]
+        [::std::mem::size_of::<FaissClusteringParameters>() - 48usize];
+    ["Alignment of FaissClusteringParameters"]
+        [::std::mem::align_of::<FaissClusteringParameters>() - 8usize];
+    ["Offset of field: FaissClusteringParameters::niter"]
+        [::std::mem::offset_of!(FaissClusteringParameters, niter) - 0usize];
+    ["Offset of field: FaissClusteringParameters::nredo"]
+        [::std::mem::offset_of!(FaissClusteringParameters, nredo) - 4usize];
+    ["Offset of field: FaissClusteringParameters::verbose"]
+        [::std::mem::offset_of!(FaissClusteringParameters, verbose) - 8usize];
+    ["Offset of field: FaissClusteringParameters::spherical"]
+        [::std::mem::offset_of!(FaissClusteringParameters, spherical) - 12usize];
+    ["Offset of field: FaissClusteringParameters::int_centroids"]
+        [::std::mem::offset_of!(FaissClusteringParameters, int_centroids) - 16usize];
+    ["Offset of field: FaissClusteringParameters::update_index"]
+        [::std::mem::offset_of!(FaissClusteringParameters, update_index) - 20usize];
+    ["Offset of field: FaissClusteringParameters::frozen_centroids"]
+        [::std::mem::offset_of!(FaissClusteringParameters, frozen_centroids) - 24usize];
+    ["Offset of field: FaissClusteringParameters::min_points_per_centroid"]
+        [::std::mem::offset_of!(FaissClusteringParameters, min_points_per_centroid) - 28usize];
+    ["Offset of field: FaissClusteringParameters::max_points_per_centroid"]
+        [::std::mem::offset_of!(FaissClusteringParameters, max_points_per_centroid) - 32usize];
+    ["Offset of field: FaissClusteringParameters::seed"]
+        [::std::mem::offset_of!(FaissClusteringParameters, seed) - 36usize];
+    ["Offset of field: FaissClusteringParameters::decode_block_size"]
+        [::std::mem::offset_of!(FaissClusteringParameters, decode_block_size) - 40usize];
+};
+unsafe extern "C" {
+    #[doc = " Sets the ClusteringParameters object with reasonable defaults"]
+    pub fn faiss_ClusteringParameters_init(params: *mut FaissClusteringParameters);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissClustering_H {
+    _unused: [u8; 0],
+}
+#[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+pub type FaissClustering = FaissClustering_H;
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_niter(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexFlat_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlat;
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_nredo(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexFlat_free(obj: *mut FaissIndexFlat);
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_verbose(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    #[doc = " compute distance with a subset of vectors\n\n @param index   opaque pointer to index object\n @param x       query vectors, size n * d\n @param labels  indices of the vectors that should be compared\n                for each query vector, size n * k\n @param distances\n                corresponding output distances, size n * k"]
-    pub fn faiss_IndexFlat_compute_distance_subset(
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_spherical(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_int_centroids(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_update_index(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_frozen_centroids(arg1: *const FaissClustering)
+        -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_min_points_per_centroid(
+        arg1: *const FaissClustering,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_max_points_per_centroid(
+        arg1: *const FaissClustering,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_seed(arg1: *const FaissClustering) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " clustering based on assignment - centroid update iterations\n\n The clustering is based on an Index object that assigns training\n points to the centroids. Therefore, at each iteration the centroids\n are added to the index.\n\n On output, the centroids table is set to the latest version\n of the centroids and they are also added to the index. If the\n centroids table it is not empty on input, it is also used for\n initialization.\n\n To do several clusterings, just call train() several times on\n different training sets, clearing the centroid table in between."]
+    pub fn faiss_Clustering_decode_block_size(arg1: *const FaissClustering) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " getter for d"]
+    pub fn faiss_Clustering_d(arg1: *const FaissClustering) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " getter for k"]
+    pub fn faiss_Clustering_k(arg1: *const FaissClustering) -> usize;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissClusteringIterationStats_H {
+    _unused: [u8; 0],
+}
+#[doc = " getter for k"]
+pub type FaissClusteringIterationStats = FaissClusteringIterationStats_H;
+unsafe extern "C" {
+    #[doc = " getter for k"]
+    pub fn faiss_ClusteringIterationStats_obj(arg1: *const FaissClusteringIterationStats) -> f32;
+}
+unsafe extern "C" {
+    #[doc = " getter for k"]
+    pub fn faiss_ClusteringIterationStats_time(arg1: *const FaissClusteringIterationStats) -> f64;
+}
+unsafe extern "C" {
+    #[doc = " getter for k"]
+    pub fn faiss_ClusteringIterationStats_time_search(
+        arg1: *const FaissClusteringIterationStats,
+    ) -> f64;
+}
+unsafe extern "C" {
+    #[doc = " getter for k"]
+    pub fn faiss_ClusteringIterationStats_imbalance_factor(
+        arg1: *const FaissClusteringIterationStats,
+    ) -> f64;
+}
+unsafe extern "C" {
+    #[doc = " getter for k"]
+    pub fn faiss_ClusteringIterationStats_nsplit(
+        arg1: *const FaissClusteringIterationStats,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " getter for centroids (size = k * d)"]
+    pub fn faiss_Clustering_centroids(
+        clustering: *mut FaissClustering,
+        centroids: *mut *mut f32,
+        size: *mut usize,
+    );
+}
+unsafe extern "C" {
+    #[doc = " getter for iteration stats"]
+    pub fn faiss_Clustering_iteration_stats(
+        clustering: *mut FaissClustering,
+        iteration_stats: *mut *mut FaissClusteringIterationStats,
+        size: *mut usize,
+    );
+}
+unsafe extern "C" {
+    #[doc = " the only mandatory parameters are k and d"]
+    pub fn faiss_Clustering_new(
+        p_clustering: *mut *mut FaissClustering,
+        d: ::std::os::raw::c_int,
+        k: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_Clustering_new_with_params(
+        p_clustering: *mut *mut FaissClustering,
+        d: ::std::os::raw::c_int,
+        k: ::std::os::raw::c_int,
+        cp: *const FaissClusteringParameters,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_Clustering_train(
+        clustering: *mut FaissClustering,
+        n: idx_t,
+        x: *const f32,
         index: *mut FaissIndex,
-        n: idx_t,
-        x: *const f32,
-        k: idx_t,
-        distances: *mut f32,
-        labels: *const idx_t,
-    ) -> ::std::os::raw::c_int;
-}
-pub type FaissIndexFlatIP = FaissIndex_H;
-unsafe extern "C" {
-    pub fn faiss_IndexFlatIP_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlatIP;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlatIP_free(obj: *mut FaissIndexFlatIP);
-}
-unsafe extern "C" {
-    #[doc = " Opaque type for IndexFlatIP"]
-    pub fn faiss_IndexFlatIP_new(p_index: *mut *mut FaissIndexFlatIP) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlatIP_new_with(
-        p_index: *mut *mut FaissIndexFlatIP,
-        d: idx_t,
-    ) -> ::std::os::raw::c_int;
-}
-pub type FaissIndexFlatL2 = FaissIndex_H;
-unsafe extern "C" {
-    pub fn faiss_IndexFlatL2_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlatL2;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlatL2_free(obj: *mut FaissIndexFlatL2);
-}
-unsafe extern "C" {
-    #[doc = " Opaque type for IndexFlatL2"]
-    pub fn faiss_IndexFlatL2_new(p_index: *mut *mut FaissIndexFlatL2) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlatL2_new_with(
-        p_index: *mut *mut FaissIndexFlatL2,
-        d: idx_t,
-    ) -> ::std::os::raw::c_int;
-}
-pub type FaissIndexRefineFlat = FaissIndex_H;
-unsafe extern "C" {
-    #[doc = " Opaque type for IndexRefineFlat\n\n Index that queries in a base_index (a fast one) and refines the\n results with an exact search, hopefully improving the results."]
-    pub fn faiss_IndexRefineFlat_new(
-        p_index: *mut *mut FaissIndexRefineFlat,
-        base_index: *mut FaissIndex,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexRefineFlat_free(obj: *mut FaissIndexRefineFlat);
+    pub fn faiss_Clustering_free(clustering: *mut FaissClustering);
 }
 unsafe extern "C" {
-    pub fn faiss_IndexRefineFlat_cast(arg1: *mut FaissIndex) -> *mut FaissIndexRefineFlat;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexRefineFlat_own_fields(
-        arg1: *const FaissIndexRefineFlat,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexRefineFlat_set_own_fields(
-        arg1: *mut FaissIndexRefineFlat,
-        arg2: ::std::os::raw::c_int,
-    );
-}
-unsafe extern "C" {
-    pub fn faiss_IndexRefineFlat_k_factor(arg1: *const FaissIndexRefineFlat) -> f32;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexRefineFlat_set_k_factor(arg1: *mut FaissIndexRefineFlat, arg2: f32);
-}
-pub type FaissIndexFlat1D = FaissIndex_H;
-unsafe extern "C" {
-    pub fn faiss_IndexFlat1D_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlat1D;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlat1D_free(obj: *mut FaissIndexFlat1D);
-}
-unsafe extern "C" {
-    #[doc = " Opaque type for IndexFlat1D\n\n optimized version for 1D \"vectors\""]
-    pub fn faiss_IndexFlat1D_new(p_index: *mut *mut FaissIndexFlat1D) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlat1D_new_with(
-        p_index: *mut *mut FaissIndexFlat1D,
-        continuous_update: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexFlat1D_update_permutation(
-        index: *mut FaissIndexFlat1D,
-    ) -> ::std::os::raw::c_int;
-}
-pub type FaissIndexIVFFlat = FaissIndex_H;
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_free(obj: *mut FaissIndexIVFFlat);
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_cast(arg1: *mut FaissIndex) -> *mut FaissIndexIVFFlat;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_nlist(arg1: *const FaissIndexIVFFlat) -> usize;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_nprobe(arg1: *const FaissIndexIVFFlat) -> usize;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_set_nprobe(arg1: *mut FaissIndexIVFFlat, arg2: usize);
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_quantizer(arg1: *const FaissIndexIVFFlat) -> *mut FaissIndex;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_quantizer_trains_alone(
-        arg1: *const FaissIndexIVFFlat,
-    ) -> ::std::os::raw::c_char;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_own_fields(arg1: *const FaissIndexIVFFlat) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_set_own_fields(
-        arg1: *mut FaissIndexIVFFlat,
-        arg2: ::std::os::raw::c_int,
-    );
-}
-unsafe extern "C" {
-    #[doc = " whether object owns the quantizer"]
-    pub fn faiss_IndexIVFFlat_new(p_index: *mut *mut FaissIndexIVFFlat) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_new_with(
-        p_index: *mut *mut FaissIndexIVFFlat,
-        quantizer: *mut FaissIndex,
+    #[doc = " simplified interface\n\n @param d dimension of the data\n @param n nb of training vectors\n @param k nb of output centroids\n @param x training set (size n * d)\n @param centroids output centroids (size k * d)\n @param q_error final quantization error\n @return error code"]
+    pub fn faiss_kmeans_clustering(
         d: usize,
-        nlist: usize,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_new_with_metric(
-        p_index: *mut *mut FaissIndexIVFFlat,
-        quantizer: *mut FaissIndex,
-        d: usize,
-        nlist: usize,
-        metric: FaissMetricType,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    pub fn faiss_IndexIVFFlat_add_core(
-        index: *mut FaissIndexIVFFlat,
-        n: idx_t,
+        n: usize,
+        k: usize,
         x: *const f32,
-        xids: *const idx_t,
-        precomputed_idx: *const i64,
+        centroids: *mut f32,
+        q_error: *mut f32,
     ) -> ::std::os::raw::c_int;
 }
+#[doc = " No error"]
+pub const FaissErrorCode_OK: FaissErrorCode = 0;
+#[doc = " Any exception other than Faiss or standard C++ library exceptions"]
+pub const FaissErrorCode_UNKNOWN_EXCEPT: FaissErrorCode = -1;
+#[doc = " Faiss library exception"]
+pub const FaissErrorCode_FAISS_EXCEPT: FaissErrorCode = -2;
+#[doc = " Standard C++ library exception"]
+pub const FaissErrorCode_STD_EXCEPT: FaissErrorCode = -4;
+#[doc = " An error code which depends on the exception thrown from the previous\n operation. See `faiss_get_last_error` to retrieve the error message."]
+pub type FaissErrorCode = ::std::os::raw::c_int;
 unsafe extern "C" {
-    #[doc = " Update a subset of vectors.\n\n The index must have a direct_map\n\n @param nv     nb of vectors to update\n @param idx    vector indices to update, size nv\n @param v      vectors of new values, size nv*d"]
-    pub fn faiss_IndexIVFFlat_update_vectors(
-        index: *mut FaissIndexIVFFlat,
-        nv: ::std::os::raw::c_int,
-        idx: *mut idx_t,
-        v: *const f32,
-    ) -> ::std::os::raw::c_int;
+    #[doc = " Get the error message of the last failed operation performed by Faiss.\n The given pointer is only invalid until another Faiss function is\n called."]
+    pub fn faiss_get_last_error() -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
     pub fn faiss_RangeSearchResult_nq(arg1: *const FaissRangeSearchResult) -> usize;
@@ -828,6 +706,7 @@ unsafe extern "C" {
     pub fn faiss_RangeSearchResult_free(obj: *mut FaissRangeSearchResult);
 }
 unsafe extern "C" {
+    #[doc = " getter for buffer_size"]
     pub fn faiss_RangeSearchResult_buffer_size(arg1: *const FaissRangeSearchResult) -> usize;
 }
 unsafe extern "C" {
@@ -843,6 +722,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Encapsulates a set of ids to remove."]
     pub fn faiss_IDSelector_free(obj: *mut FaissIDSelector);
 }
 unsafe extern "C" {
@@ -857,14 +737,18 @@ unsafe extern "C" {
 pub struct FaissIDSelectorRange_H {
     _unused: [u8; 0],
 }
+#[doc = " remove ids between [imni, imax)"]
 pub type FaissIDSelectorRange = FaissIDSelectorRange_H;
 unsafe extern "C" {
+    #[doc = " remove ids between [imni, imax)"]
     pub fn faiss_IDSelectorRange_free(obj: *mut FaissIDSelectorRange);
 }
 unsafe extern "C" {
+    #[doc = " remove ids between [imni, imax)"]
     pub fn faiss_IDSelectorRange_imin(arg1: *const FaissIDSelectorRange) -> idx_t;
 }
 unsafe extern "C" {
+    #[doc = " remove ids between [imni, imax)"]
     pub fn faiss_IDSelectorRange_imax(arg1: *const FaissIDSelectorRange) -> idx_t;
 }
 unsafe extern "C" {
@@ -880,11 +764,14 @@ unsafe extern "C" {
 pub struct FaissIDSelectorBatch_H {
     _unused: [u8; 0],
 }
+#[doc = " Remove ids from a set. Repetitions of ids in the indices set\n passed to the constructor does not hurt performance. The hash\n function used for the bloom filter and GCC's implementation of\n unordered_set are just the least significant bits of the id. This\n works fine for random ids or ids in sequences but will produce many\n hash collisions if lsb's are always the same"]
 pub type FaissIDSelectorBatch = FaissIDSelectorBatch_H;
 unsafe extern "C" {
+    #[doc = " Remove ids from a set. Repetitions of ids in the indices set\n passed to the constructor does not hurt performance. The hash\n function used for the bloom filter and GCC's implementation of\n unordered_set are just the least significant bits of the id. This\n works fine for random ids or ids in sequences but will produce many\n hash collisions if lsb's are always the same"]
     pub fn faiss_IDSelectorBatch_nbits(arg1: *const FaissIDSelectorBatch) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Remove ids from a set. Repetitions of ids in the indices set\n passed to the constructor does not hurt performance. The hash\n function used for the bloom filter and GCC's implementation of\n unordered_set are just the least significant bits of the id. This\n works fine for random ids or ids in sequences but will produce many\n hash collisions if lsb's are always the same"]
     pub fn faiss_IDSelectorBatch_mask(arg1: *const FaissIDSelectorBatch) -> idx_t;
 }
 unsafe extern "C" {
@@ -893,6 +780,28 @@ unsafe extern "C" {
         p_sel: *mut *mut FaissIDSelectorBatch,
         n: usize,
         indices: *const idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissIDSelectorBitmap_H {
+    _unused: [u8; 0],
+}
+pub type FaissIDSelectorBitmap = FaissIDSelectorBitmap_H;
+unsafe extern "C" {
+    pub fn faiss_IDSelectorBitmap_free(obj: *mut FaissIDSelectorBitmap);
+}
+unsafe extern "C" {
+    pub fn faiss_IDSelectorBitmap_n(arg1: *const FaissIDSelectorBitmap) -> usize;
+}
+unsafe extern "C" {
+    pub fn faiss_IDSelectorBitmap_bitmap(arg1: *const FaissIDSelectorBitmap) -> *const u8;
+}
+unsafe extern "C" {
+    pub fn faiss_IDSelectorBitmap_new(
+        p_sel: *mut *mut FaissIDSelectorBitmap,
+        n: usize,
+        bitmap: *const u8,
     ) -> ::std::os::raw::c_int;
 }
 #[repr(C)]
@@ -951,14 +860,18 @@ unsafe extern "C" {
 pub struct FaissBufferList_H {
     _unused: [u8; 0],
 }
+#[doc = " List of temporary buffers used to store results before they are\n  copied to the RangeSearchResult object."]
 pub type FaissBufferList = FaissBufferList_H;
 unsafe extern "C" {
+    #[doc = " List of temporary buffers used to store results before they are\n  copied to the RangeSearchResult object."]
     pub fn faiss_BufferList_free(obj: *mut FaissBufferList);
 }
 unsafe extern "C" {
+    #[doc = " List of temporary buffers used to store results before they are\n  copied to the RangeSearchResult object."]
     pub fn faiss_BufferList_buffer_size(arg1: *const FaissBufferList) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " List of temporary buffers used to store results before they are\n  copied to the RangeSearchResult object."]
     pub fn faiss_BufferList_wp(arg1: *const FaissBufferList) -> usize;
 }
 #[doc = " List of temporary buffers used to store results before they are\n  copied to the RangeSearchResult object."]
@@ -1006,20 +919,25 @@ unsafe extern "C" {
 pub struct FaissRangeSearchPartialResult_H {
     _unused: [u8; 0],
 }
+#[doc = " the entries in the buffers are split per query"]
 pub type FaissRangeSearchPartialResult = FaissRangeSearchPartialResult_H;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct FaissRangeQueryResult_H {
     _unused: [u8; 0],
 }
+#[doc = " result structure for a single query"]
 pub type FaissRangeQueryResult = FaissRangeQueryResult_H;
 unsafe extern "C" {
+    #[doc = " result structure for a single query"]
     pub fn faiss_RangeQueryResult_qno(arg1: *const FaissRangeQueryResult) -> idx_t;
 }
 unsafe extern "C" {
+    #[doc = " result structure for a single query"]
     pub fn faiss_RangeQueryResult_nres(arg1: *const FaissRangeQueryResult) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " result structure for a single query"]
     pub fn faiss_RangeQueryResult_pres(
         arg1: *const FaissRangeQueryResult,
     ) -> *mut FaissRangeSearchPartialResult;
@@ -1094,6 +1012,69 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn faiss_DistanceComputer_free(obj: *mut FaissDistanceComputer);
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissIOReader_H {
+    _unused: [u8; 0],
+}
+pub type FaissIOReader = FaissIOReader_H;
+unsafe extern "C" {
+    pub fn faiss_IOReader_free(obj: *mut FaissIOReader);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissIOWriter_H {
+    _unused: [u8; 0],
+}
+pub type FaissIOWriter = FaissIOWriter_H;
+unsafe extern "C" {
+    pub fn faiss_IOWriter_free(obj: *mut FaissIOWriter);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissCustomIOReader_H {
+    _unused: [u8; 0],
+}
+#[doc = " Custom reader + writer\n\n Reader and writer which wraps a function pointer,\n primarily for FFI use."]
+pub type FaissCustomIOReader = FaissCustomIOReader_H;
+unsafe extern "C" {
+    #[doc = " Custom reader + writer\n\n Reader and writer which wraps a function pointer,\n primarily for FFI use."]
+    pub fn faiss_CustomIOReader_free(obj: *mut FaissCustomIOReader);
+}
+unsafe extern "C" {
+    #[doc = " Custom reader + writer\n\n Reader and writer which wraps a function pointer,\n primarily for FFI use."]
+    pub fn faiss_CustomIOReader_new(
+        p_out: *mut *mut FaissCustomIOReader,
+        func_in: ::std::option::Option<
+            unsafe extern "C" fn(
+                ptr: *mut ::std::os::raw::c_void,
+                size: usize,
+                nitems: usize,
+            ) -> usize,
+        >,
+    ) -> ::std::os::raw::c_int;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissCustomIOWriter_H {
+    _unused: [u8; 0],
+}
+pub type FaissCustomIOWriter = FaissCustomIOWriter_H;
+unsafe extern "C" {
+    pub fn faiss_CustomIOWriter_free(obj: *mut FaissCustomIOWriter);
+}
+unsafe extern "C" {
+    pub fn faiss_CustomIOWriter_new(
+        p_out: *mut *mut FaissCustomIOWriter,
+        func_in: ::std::option::Option<
+            unsafe extern "C" fn(
+                ptr: *const ::std::os::raw::c_void,
+                size: usize,
+                nitems: usize,
+            ) -> usize,
+        >,
+    ) -> ::std::os::raw::c_int;
+}
 pub type FaissSearchParametersIVF = FaissSearchParameters_H;
 unsafe extern "C" {
     pub fn faiss_SearchParametersIVF_free(obj: *mut FaissSearchParametersIVF);
@@ -1136,34 +1117,44 @@ unsafe extern "C" {
         arg2: usize,
     );
 }
+#[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an Index instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is then stored.\n\n At search time, the vector to be searched is also quantized, and\n only the list corresponding to the quantization index is\n searched. This speeds up the search by making it\n non-exhaustive. This can be relaxed using multi-probe search: a few\n (nprobe) quantization indices are selected and several inverted\n lists are visited.\n\n Sub-classes implement a post-filtering of the index that refines\n the distance estimation from the query to database vectors."]
 pub type FaissIndexIVF = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an Index instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is then stored.\n\n At search time, the vector to be searched is also quantized, and\n only the list corresponding to the quantization index is\n searched. This speeds up the search by making it\n non-exhaustive. This can be relaxed using multi-probe search: a few\n (nprobe) quantization indices are selected and several inverted\n lists are visited.\n\n Sub-classes implement a post-filtering of the index that refines\n the distance estimation from the query to database vectors."]
     pub fn faiss_IndexIVF_free(obj: *mut FaissIndexIVF);
 }
 unsafe extern "C" {
+    #[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an Index instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is then stored.\n\n At search time, the vector to be searched is also quantized, and\n only the list corresponding to the quantization index is\n searched. This speeds up the search by making it\n non-exhaustive. This can be relaxed using multi-probe search: a few\n (nprobe) quantization indices are selected and several inverted\n lists are visited.\n\n Sub-classes implement a post-filtering of the index that refines\n the distance estimation from the query to database vectors."]
     pub fn faiss_IndexIVF_cast(arg1: *mut FaissIndex) -> *mut FaissIndexIVF;
 }
 unsafe extern "C" {
+    #[doc = " number of possible key values"]
     pub fn faiss_IndexIVF_nlist(arg1: *const FaissIndexIVF) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " number of probes at query time"]
     pub fn faiss_IndexIVF_nprobe(arg1: *const FaissIndexIVF) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " number of probes at query time"]
     pub fn faiss_IndexIVF_set_nprobe(arg1: *mut FaissIndexIVF, arg2: usize);
 }
 unsafe extern "C" {
+    #[doc = " quantizer that maps vectors to inverted lists"]
     pub fn faiss_IndexIVF_quantizer(arg1: *const FaissIndexIVF) -> *mut FaissIndex;
 }
 unsafe extern "C" {
+    #[doc = " = 0: use the quantizer as index in a kmeans training\n = 1: just pass on the training set to the train() of the quantizer\n = 2: kmeans training on a flat index + add the centroids to the quantizer"]
     pub fn faiss_IndexIVF_quantizer_trains_alone(
         arg1: *const FaissIndexIVF,
     ) -> ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
     pub fn faiss_IndexIVF_own_fields(arg1: *const FaissIndexIVF) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
     pub fn faiss_IndexIVF_set_own_fields(arg1: *mut FaissIndexIVF, arg2: ::std::os::raw::c_int);
 }
 unsafe extern "C" {
@@ -1266,40 +1257,270 @@ unsafe extern "C" {
     #[doc = " global var that collects all statists"]
     pub fn faiss_get_indexIVF_stats() -> *mut FaissIndexIVFStats;
 }
-pub type FaissIndexLSH = FaissIndex_H;
+#[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an IndexBinary instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is stored.\n\n Otherwise the object is similar to the IndexIVF"]
+pub type FaissIndexBinaryIVF = FaissIndexBinary_H;
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_free(obj: *mut FaissIndexLSH);
+    #[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an IndexBinary instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is stored.\n\n Otherwise the object is similar to the IndexIVF"]
+    pub fn faiss_IndexBinaryIVF_free(obj: *mut FaissIndexBinaryIVF);
 }
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_cast(arg1: *mut FaissIndex) -> *mut FaissIndexLSH;
+    #[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an IndexBinary instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is stored.\n\n Otherwise the object is similar to the IndexIVF"]
+    pub fn faiss_IndexBinaryIVF_cast(arg1: *mut FaissIndexBinary) -> *mut FaissIndexBinaryIVF;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_nbits(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+    #[doc = " number of possible key values"]
+    pub fn faiss_IndexBinaryIVF_nlist(arg1: *const FaissIndexBinaryIVF) -> usize;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_code_size(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+    #[doc = " number of probes at query time"]
+    pub fn faiss_IndexBinaryIVF_nprobe(arg1: *const FaissIndexBinaryIVF) -> usize;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_rotate_data(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+    #[doc = " number of probes at query time"]
+    pub fn faiss_IndexBinaryIVF_set_nprobe(arg1: *mut FaissIndexBinaryIVF, arg2: usize);
 }
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_train_thresholds(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+    #[doc = " quantizer that maps vectors to inverted lists"]
+    pub fn faiss_IndexBinaryIVF_quantizer(
+        arg1: *const FaissIndexBinaryIVF,
+    ) -> *mut FaissIndexBinary;
 }
 unsafe extern "C" {
-    #[doc = " The sign of each vector component is put in a binary signature"]
-    pub fn faiss_IndexLSH_new(
-        p_index: *mut *mut FaissIndexLSH,
-        d: idx_t,
-        nbits: ::std::os::raw::c_int,
+    #[doc = " whether object owns the quantizer"]
+    pub fn faiss_IndexBinaryIVF_own_fields(
+        arg1: *const FaissIndexBinaryIVF,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn faiss_IndexLSH_new_with_options(
-        p_index: *mut *mut FaissIndexLSH,
+    #[doc = " whether object owns the quantizer"]
+    pub fn faiss_IndexBinaryIVF_set_own_fields(
+        arg1: *mut FaissIndexBinaryIVF,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    #[doc = " max nb of codes to visit to do a query"]
+    pub fn faiss_IndexBinaryIVF_max_codes(arg1: *const FaissIndexBinaryIVF) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " max nb of codes to visit to do a query"]
+    pub fn faiss_IndexBinaryIVF_set_max_codes(arg1: *mut FaissIndexBinaryIVF, arg2: usize);
+}
+unsafe extern "C" {
+    #[doc = " Select between using a heap or counting to select the k smallest values\n when scanning inverted lists."]
+    pub fn faiss_IndexBinaryIVF_use_heap(arg1: *const FaissIndexBinaryIVF)
+        -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Select between using a heap or counting to select the k smallest values\n when scanning inverted lists."]
+    pub fn faiss_IndexBinaryIVF_set_use_heap(
+        arg1: *mut FaissIndexBinaryIVF,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    #[doc = " collect computations per batch"]
+    pub fn faiss_IndexBinaryIVF_per_invlist_search(
+        arg1: *const FaissIndexBinaryIVF,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " collect computations per batch"]
+    pub fn faiss_IndexBinaryIVF_set_per_invlist_search(
+        arg1: *mut FaissIndexBinaryIVF,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    #[doc = " moves the entries from another dataset to self. On output,\n other is empty. add_id is added to all moved ids (for\n sequential ids, this would be this->ntotal"]
+    pub fn faiss_IndexBinaryIVF_merge_from(
+        index: *mut FaissIndexBinaryIVF,
+        other: *mut FaissIndexBinaryIVF,
+        add_id: idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Search a set of vectors, that are pre-quantized by the IVF\n  quantizer. Fill in the corresponding heaps with the query\n  results. search() calls this.\n\n @param n      nb of vectors to query\n @param x      query vectors, size nx * d\n @param assign coarse quantization indices, size nx * nprobe\n @param centroid_dis\n               distances to coarse centroids, size nx * nprobe\n @param distance\n               output distances, size n * k\n @param labels output labels, size n * k\n @param store_pairs store inv list index + inv list offset\n                     instead in upper/lower 32 bit of result,\n                     instead of ids (used for reranking).\n @param params used to override the object's search parameters"]
+    pub fn faiss_IndexBinaryIVF_search_preassigned(
+        index: *const FaissIndexBinaryIVF,
+        n: idx_t,
+        x: *const u8,
+        k: idx_t,
+        cidx: *const idx_t,
+        cdis: *const i32,
+        dis: *mut i32,
+        idx: *mut idx_t,
+        store_pairs: ::std::os::raw::c_int,
+        params: *const FaissSearchParametersIVF,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexBinaryIVF_get_list_size(
+        index: *const FaissIndexBinaryIVF,
+        list_no: usize,
+    ) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " initialize a direct map\n\n @param new_maintain_direct_map    if true, create a direct map,\n                                   else clear it"]
+    pub fn faiss_IndexBinaryIVF_make_direct_map(
+        index: *mut FaissIndexBinaryIVF,
+        new_maintain_direct_map: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Check the inverted lists' imbalance factor.\n\n 1= perfectly balanced, >1: imbalanced"]
+    pub fn faiss_IndexBinaryIVF_imbalance_factor(index: *const FaissIndexBinaryIVF) -> f64;
+}
+unsafe extern "C" {
+    #[doc = " Build an index with the sequence of processing steps described in\n  the string."]
+    pub fn faiss_index_factory(
+        p_index: *mut *mut FaissIndex,
+        d: ::std::os::raw::c_int,
+        description: *const ::std::os::raw::c_char,
+        metric: FaissMetricType,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Build a binary index with the sequence of processing steps described in\n  the string."]
+    pub fn faiss_index_binary_factory(
+        p_index: *mut *mut FaissIndexBinary,
+        d: ::std::os::raw::c_int,
+        description: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Opaque type for IndexFlat"]
+pub type FaissIndexFlat = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlat"]
+    pub fn faiss_IndexFlat_new(p_index: *mut *mut FaissIndexFlat) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexFlat_new_with(
+        p_index: *mut *mut FaissIndexFlat,
         d: idx_t,
-        nbits: ::std::os::raw::c_int,
-        rotate_data: ::std::os::raw::c_int,
-        train_thresholds: ::std::os::raw::c_int,
+        metric: FaissMetricType,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " get a pointer to the index's internal data (the `xb` field). The outputs\n become invalid after any data addition or removal operation.\n\n @param index   opaque pointer to index object\n @param p_xb    output, the pointer to the beginning of `xb`.\n @param p_size  output, the current size of `sb` in number of float values."]
+    pub fn faiss_IndexFlat_xb(index: *mut FaissIndexFlat, p_xb: *mut *mut f32, p_size: *mut usize);
+}
+unsafe extern "C" {
+    #[doc = " attempt a dynamic cast to a flat index, thus checking\n check whether the underlying index type is `IndexFlat`.\n\n @param index opaque pointer to index object\n @return the same pointer if the index is a flat index, NULL otherwise"]
+    pub fn faiss_IndexFlat_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlat;
+}
+unsafe extern "C" {
+    #[doc = " attempt a dynamic cast to a flat index, thus checking\n check whether the underlying index type is `IndexFlat`.\n\n @param index opaque pointer to index object\n @return the same pointer if the index is a flat index, NULL otherwise"]
+    pub fn faiss_IndexFlat_free(obj: *mut FaissIndexFlat);
+}
+unsafe extern "C" {
+    #[doc = " compute distance with a subset of vectors\n\n @param index   opaque pointer to index object\n @param x       query vectors, size n * d\n @param labels  indices of the vectors that should be compared\n                for each query vector, size n * k\n @param distances\n                corresponding output distances, size n * k"]
+    pub fn faiss_IndexFlat_compute_distance_subset(
+        index: *mut FaissIndex,
+        n: idx_t,
+        x: *const f32,
+        k: idx_t,
+        distances: *mut f32,
+        labels: *const idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Opaque type for IndexFlatIP"]
+pub type FaissIndexFlatIP = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlatIP"]
+    pub fn faiss_IndexFlatIP_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlatIP;
+}
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlatIP"]
+    pub fn faiss_IndexFlatIP_free(obj: *mut FaissIndexFlatIP);
+}
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlatIP"]
+    pub fn faiss_IndexFlatIP_new(p_index: *mut *mut FaissIndexFlatIP) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexFlatIP_new_with(
+        p_index: *mut *mut FaissIndexFlatIP,
+        d: idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Opaque type for IndexFlatL2"]
+pub type FaissIndexFlatL2 = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlatL2"]
+    pub fn faiss_IndexFlatL2_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlatL2;
+}
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlatL2"]
+    pub fn faiss_IndexFlatL2_free(obj: *mut FaissIndexFlatL2);
+}
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlatL2"]
+    pub fn faiss_IndexFlatL2_new(p_index: *mut *mut FaissIndexFlatL2) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexFlatL2_new_with(
+        p_index: *mut *mut FaissIndexFlatL2,
+        d: idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Opaque type for IndexRefineFlat\n\n Index that queries in a base_index (a fast one) and refines the\n results with an exact search, hopefully improving the results."]
+pub type FaissIndexRefineFlat = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexRefineFlat\n\n Index that queries in a base_index (a fast one) and refines the\n results with an exact search, hopefully improving the results."]
+    pub fn faiss_IndexRefineFlat_new(
+        p_index: *mut *mut FaissIndexRefineFlat,
+        base_index: *mut FaissIndex,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexRefineFlat_free(obj: *mut FaissIndexRefineFlat);
+}
+unsafe extern "C" {
+    pub fn faiss_IndexRefineFlat_cast(arg1: *mut FaissIndex) -> *mut FaissIndexRefineFlat;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexRefineFlat_own_fields(
+        arg1: *const FaissIndexRefineFlat,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexRefineFlat_set_own_fields(
+        arg1: *mut FaissIndexRefineFlat,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    #[doc = " factor between k requested in search and the k requested from\n the base_index (should be >= 1)"]
+    pub fn faiss_IndexRefineFlat_k_factor(arg1: *const FaissIndexRefineFlat) -> f32;
+}
+unsafe extern "C" {
+    #[doc = " factor between k requested in search and the k requested from\n the base_index (should be >= 1)"]
+    pub fn faiss_IndexRefineFlat_set_k_factor(arg1: *mut FaissIndexRefineFlat, arg2: f32);
+}
+#[doc = " Opaque type for IndexFlat1D\n\n optimized version for 1D \"vectors\""]
+pub type FaissIndexFlat1D = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlat1D\n\n optimized version for 1D \"vectors\""]
+    pub fn faiss_IndexFlat1D_cast(arg1: *mut FaissIndex) -> *mut FaissIndexFlat1D;
+}
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlat1D\n\n optimized version for 1D \"vectors\""]
+    pub fn faiss_IndexFlat1D_free(obj: *mut FaissIndexFlat1D);
+}
+unsafe extern "C" {
+    #[doc = " Opaque type for IndexFlat1D\n\n optimized version for 1D \"vectors\""]
+    pub fn faiss_IndexFlat1D_new(p_index: *mut *mut FaissIndexFlat1D) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexFlat1D_new_with(
+        p_index: *mut *mut FaissIndexFlat1D,
+        continuous_update: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexFlat1D_update_permutation(
+        index: *mut FaissIndexFlat1D,
     ) -> ::std::os::raw::c_int;
 }
 #[repr(C)]
@@ -1307,19 +1528,24 @@ unsafe extern "C" {
 pub struct FaissVectorTransform_H {
     _unused: [u8; 0],
 }
+#[doc = " Opaque type for referencing to a VectorTransform object"]
 pub type FaissVectorTransform = FaissVectorTransform_H;
 unsafe extern "C" {
+    #[doc = " Opaque type for referencing to a VectorTransform object"]
     pub fn faiss_VectorTransform_free(obj: *mut FaissVectorTransform);
 }
 unsafe extern "C" {
+    #[doc = " Getter for is_trained"]
     pub fn faiss_VectorTransform_is_trained(
         arg1: *const FaissVectorTransform,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for input dimension"]
     pub fn faiss_VectorTransform_d_in(arg1: *const FaissVectorTransform) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for output dimension"]
     pub fn faiss_VectorTransform_d_out(arg1: *const FaissVectorTransform) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
@@ -1356,8 +1582,10 @@ unsafe extern "C" {
         x: *mut f32,
     );
 }
+#[doc = " Opaque type for referencing to a LinearTransform object"]
 pub type FaissLinearTransform = FaissVectorTransform_H;
 unsafe extern "C" {
+    #[doc = " Opaque type for referencing to a LinearTransform object"]
     pub fn faiss_LinearTransform_free(obj: *mut FaissLinearTransform);
 }
 unsafe extern "C" {
@@ -1374,17 +1602,21 @@ unsafe extern "C" {
     pub fn faiss_LinearTransform_set_is_orthonormal(vt: *mut FaissLinearTransform);
 }
 unsafe extern "C" {
+    #[doc = " Getter for have_bias"]
     pub fn faiss_LinearTransform_have_bias(
         arg1: *const FaissLinearTransform,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for is_orthonormal"]
     pub fn faiss_LinearTransform_is_orthonormal(
         arg1: *const FaissLinearTransform,
     ) -> ::std::os::raw::c_int;
 }
+#[doc = " Getter for is_orthonormal"]
 pub type FaissRandomRotationMatrix = FaissVectorTransform_H;
 unsafe extern "C" {
+    #[doc = " Getter for is_orthonormal"]
     pub fn faiss_RandomRotationMatrix_free(obj: *mut FaissRandomRotationMatrix);
 }
 unsafe extern "C" {
@@ -1409,13 +1641,17 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for eigen_power"]
     pub fn faiss_PCAMatrix_eigen_power(arg1: *const FaissPCAMatrix) -> f32;
 }
 unsafe extern "C" {
+    #[doc = " Getter for random_rotation"]
     pub fn faiss_PCAMatrix_random_rotation(arg1: *const FaissPCAMatrix) -> ::std::os::raw::c_int;
 }
+#[doc = " Getter for random_rotation"]
 pub type FaissITQMatrix = FaissVectorTransform_H;
 unsafe extern "C" {
+    #[doc = " Getter for random_rotation"]
     pub fn faiss_ITQMatrix_free(obj: *mut FaissITQMatrix);
 }
 unsafe extern "C" {
@@ -1438,10 +1674,13 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Getter for do_pca"]
     pub fn faiss_ITQTransform_do_pca(arg1: *const FaissITQTransform) -> ::std::os::raw::c_int;
 }
+#[doc = " Getter for do_pca"]
 pub type FaissOPQMatrix = FaissVectorTransform_H;
 unsafe extern "C" {
+    #[doc = " Getter for do_pca"]
     pub fn faiss_OPQMatrix_free(obj: *mut FaissOPQMatrix);
 }
 unsafe extern "C" {
@@ -1507,22 +1746,248 @@ unsafe extern "C" {
         d: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
+unsafe extern "C" {
+    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index` when a file descriptor is\n provided."]
+    pub fn faiss_write_index(idx: *const FaissIndex, f: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index` when a file path is provided."]
+    pub fn faiss_write_index_fname(
+        idx: *const FaissIndex,
+        fname: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Write index to a custom writer."]
+    pub fn faiss_write_index_custom(
+        idx: *const FaissIndex,
+        io_writer: *mut FaissIOWriter,
+        io_flags: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index` when a file descriptor is given."]
+    pub fn faiss_read_index(
+        f: *mut FILE,
+        io_flags: ::std::os::raw::c_int,
+        p_out: *mut *mut FaissIndex,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index` when a file path is given."]
+    pub fn faiss_read_index_fname(
+        fname: *const ::std::os::raw::c_char,
+        io_flags: ::std::os::raw::c_int,
+        p_out: *mut *mut FaissIndex,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read index from a custom reader."]
+    pub fn faiss_read_index_custom(
+        io_reader: *mut FaissIOReader,
+        io_flags: ::std::os::raw::c_int,
+        p_out: *mut *mut FaissIndex,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index_binary` when a file descriptor is\n provided."]
+    pub fn faiss_write_index_binary(
+        idx: *const FaissIndexBinary,
+        f: *mut FILE,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index_binary` when a file path is\n provided."]
+    pub fn faiss_write_index_binary_fname(
+        idx: *const FaissIndexBinary,
+        fname: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Write binary index to a custom writer."]
+    pub fn faiss_write_index_binary_custom(
+        idx: *const FaissIndexBinary,
+        io_writer: *mut FaissIOWriter,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index_binary` when a file descriptor is\n given."]
+    pub fn faiss_read_index_binary(
+        f: *mut FILE,
+        io_flags: ::std::os::raw::c_int,
+        p_out: *mut *mut FaissIndexBinary,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index_binary` when a file path is given."]
+    pub fn faiss_read_index_binary_fname(
+        fname: *const ::std::os::raw::c_char,
+        io_flags: ::std::os::raw::c_int,
+        p_out: *mut *mut FaissIndexBinary,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read binary index from a custom reader."]
+    pub fn faiss_read_index_binary_custom(
+        io_reader: *mut FaissIOReader,
+        io_flags: ::std::os::raw::c_int,
+        p_out: *mut *mut FaissIndexBinary,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read vector transform from a file.\n This is equivalent to `faiss:read_VectorTransform` when a file path is given."]
+    pub fn faiss_read_VectorTransform_fname(
+        fname: *const ::std::os::raw::c_char,
+        p_out: *mut *mut FaissVectorTransform,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Inverted file with stored vectors. Here the inverted file\n pre-selects the vectors to be searched, but they are not otherwise\n encoded, the code array just contains the raw float entries."]
+pub type FaissIndexIVFFlat = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " Inverted file with stored vectors. Here the inverted file\n pre-selects the vectors to be searched, but they are not otherwise\n encoded, the code array just contains the raw float entries."]
+    pub fn faiss_IndexIVFFlat_free(obj: *mut FaissIndexIVFFlat);
+}
+unsafe extern "C" {
+    #[doc = " Inverted file with stored vectors. Here the inverted file\n pre-selects the vectors to be searched, but they are not otherwise\n encoded, the code array just contains the raw float entries."]
+    pub fn faiss_IndexIVFFlat_cast(arg1: *mut FaissIndex) -> *mut FaissIndexIVFFlat;
+}
+unsafe extern "C" {
+    #[doc = " number of possible key values"]
+    pub fn faiss_IndexIVFFlat_nlist(arg1: *const FaissIndexIVFFlat) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " number of probes at query time"]
+    pub fn faiss_IndexIVFFlat_nprobe(arg1: *const FaissIndexIVFFlat) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " number of probes at query time"]
+    pub fn faiss_IndexIVFFlat_set_nprobe(arg1: *mut FaissIndexIVFFlat, arg2: usize);
+}
+unsafe extern "C" {
+    #[doc = " quantizer that maps vectors to inverted lists"]
+    pub fn faiss_IndexIVFFlat_quantizer(arg1: *const FaissIndexIVFFlat) -> *mut FaissIndex;
+}
+unsafe extern "C" {
+    #[doc = " = 0: use the quantizer as index in a kmeans training\n = 1: just pass on the training set to the train() of the quantizer\n = 2: kmeans training on a flat index + add the centroids to the quantizer"]
+    pub fn faiss_IndexIVFFlat_quantizer_trains_alone(
+        arg1: *const FaissIndexIVFFlat,
+    ) -> ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
+    pub fn faiss_IndexIVFFlat_own_fields(arg1: *const FaissIndexIVFFlat) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
+    pub fn faiss_IndexIVFFlat_set_own_fields(
+        arg1: *mut FaissIndexIVFFlat,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
+    pub fn faiss_IndexIVFFlat_new(p_index: *mut *mut FaissIndexIVFFlat) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexIVFFlat_new_with(
+        p_index: *mut *mut FaissIndexIVFFlat,
+        quantizer: *mut FaissIndex,
+        d: usize,
+        nlist: usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexIVFFlat_new_with_metric(
+        p_index: *mut *mut FaissIndexIVFFlat,
+        quantizer: *mut FaissIndex,
+        d: usize,
+        nlist: usize,
+        metric: FaissMetricType,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexIVFFlat_add_core(
+        index: *mut FaissIndexIVFFlat,
+        n: idx_t,
+        x: *const f32,
+        xids: *const idx_t,
+        precomputed_idx: *const i64,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Update a subset of vectors.\n\n The index must have a direct_map\n\n @param nv     nb of vectors to update\n @param idx    vector indices to update, size nv\n @param v      vectors of new values, size nv*d"]
+    pub fn faiss_IndexIVFFlat_update_vectors(
+        index: *mut FaissIndexIVFFlat,
+        nv: ::std::os::raw::c_int,
+        idx: *mut idx_t,
+        v: *const f32,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " The sign of each vector component is put in a binary signature"]
+pub type FaissIndexLSH = FaissIndex_H;
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_free(obj: *mut FaissIndexLSH);
+}
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_cast(arg1: *mut FaissIndex) -> *mut FaissIndexLSH;
+}
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_nbits(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_code_size(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_rotate_data(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_train_thresholds(arg1: *const FaissIndexLSH) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " The sign of each vector component is put in a binary signature"]
+    pub fn faiss_IndexLSH_new(
+        p_index: *mut *mut FaissIndexLSH,
+        d: idx_t,
+        nbits: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexLSH_new_with_options(
+        p_index: *mut *mut FaissIndexLSH,
+        d: idx_t,
+        nbits: ::std::os::raw::c_int,
+        rotate_data: ::std::os::raw::c_int,
+        train_thresholds: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+#[doc = " Index that applies a LinearTransform transform on vectors before\n  handing them over to a sub-index"]
 pub type FaissIndexPreTransform = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Index that applies a LinearTransform transform on vectors before\n  handing them over to a sub-index"]
     pub fn faiss_IndexPreTransform_free(obj: *mut FaissIndexPreTransform);
 }
 unsafe extern "C" {
+    #[doc = " Index that applies a LinearTransform transform on vectors before\n  handing them over to a sub-index"]
     pub fn faiss_IndexPreTransform_cast(arg1: *mut FaissIndex) -> *mut FaissIndexPreTransform;
 }
 unsafe extern "C" {
+    #[doc = " Index that applies a LinearTransform transform on vectors before\n  handing them over to a sub-index"]
     pub fn faiss_IndexPreTransform_index(arg1: *const FaissIndexPreTransform) -> *mut FaissIndex;
 }
 unsafe extern "C" {
+    #[doc = " Index that applies a LinearTransform transform on vectors before\n  handing them over to a sub-index"]
     pub fn faiss_IndexPreTransform_own_fields(
         arg1: *const FaissIndexPreTransform,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Index that applies a LinearTransform transform on vectors before\n  handing them over to a sub-index"]
     pub fn faiss_IndexPreTransform_set_own_fields(
         arg1: *mut FaissIndexPreTransform,
         arg2: ::std::os::raw::c_int,
@@ -1553,15 +2018,19 @@ unsafe extern "C" {
         ltrans: *mut FaissVectorTransform,
     ) -> ::std::os::raw::c_int;
 }
+#[doc = " Index that concatenates the results from several sub-indexes"]
 pub type FaissIndexReplicas = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexReplicas_free(obj: *mut FaissIndexReplicas);
 }
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexReplicas_own_fields(arg1: *const FaissIndexReplicas)
         -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexReplicas_set_own_fields(
         arg1: *mut FaissIndexReplicas,
         arg2: ::std::os::raw::c_int,
@@ -1615,6 +2084,7 @@ pub const FaissQuantizerType_QT_bf16: FaissQuantizerType = 7;
 #[doc = "< fast indexing of signed int8s ranging from [-128\n< to 127]"]
 pub const FaissQuantizerType_QT_8bit_direct_signed: FaissQuantizerType = 8;
 pub type FaissQuantizerType = ::std::os::raw::c_uint;
+#[doc = " Opaque type for IndexScalarQuantizer"]
 pub type FaissIndexScalarQuantizer = FaissIndex_H;
 unsafe extern "C" {
     #[doc = " Opaque type for IndexScalarQuantizer"]
@@ -1637,13 +2107,16 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn faiss_IndexScalarQuantizer_free(obj: *mut FaissIndexScalarQuantizer);
 }
+#[doc = " Opaque type for IndexIVFScalarQuantizer"]
 pub type FaissIndexIVFScalarQuantizer = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Opaque type for IndexIVFScalarQuantizer"]
     pub fn faiss_IndexIVFScalarQuantizer_cast(
         arg1: *mut FaissIndex,
     ) -> *mut FaissIndexIVFScalarQuantizer;
 }
 unsafe extern "C" {
+    #[doc = " Opaque type for IndexIVFScalarQuantizer"]
     pub fn faiss_IndexIVFScalarQuantizer_free(obj: *mut FaissIndexIVFScalarQuantizer);
 }
 unsafe extern "C" {
@@ -1673,29 +2146,35 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " number of possible key values"]
     pub fn faiss_IndexIVFScalarQuantizer_nlist(arg1: *const FaissIndexIVFScalarQuantizer) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " number of probes at query time"]
     pub fn faiss_IndexIVFScalarQuantizer_nprobe(arg1: *const FaissIndexIVFScalarQuantizer)
         -> usize;
 }
 unsafe extern "C" {
+    #[doc = " number of probes at query time"]
     pub fn faiss_IndexIVFScalarQuantizer_set_nprobe(
         arg1: *mut FaissIndexIVFScalarQuantizer,
         arg2: usize,
     );
 }
 unsafe extern "C" {
+    #[doc = " quantizer that maps vectors to inverted lists"]
     pub fn faiss_IndexIVFScalarQuantizer_quantizer(
         arg1: *const FaissIndexIVFScalarQuantizer,
     ) -> *mut FaissIndex;
 }
 unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
     pub fn faiss_IndexIVFScalarQuantizer_own_fields(
         arg1: *const FaissIndexIVFScalarQuantizer,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " whether object owns the quantizer"]
     pub fn faiss_IndexIVFScalarQuantizer_set_own_fields(
         arg1: *mut FaissIndexIVFScalarQuantizer,
         arg2: ::std::os::raw::c_int,
@@ -1711,24 +2190,30 @@ unsafe extern "C" {
         precomputed_idx: *const idx_t,
     ) -> ::std::os::raw::c_int;
 }
+#[doc = " Index that concatenates the results from several sub-indexes"]
 pub type FaissIndexShards = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexShards_free(obj: *mut FaissIndexShards);
 }
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexShards_own_fields(arg1: *const FaissIndexShards) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexShards_set_own_fields(
         arg1: *mut FaissIndexShards,
         arg2: ::std::os::raw::c_int,
     );
 }
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexShards_successive_ids(arg1: *const FaissIndexShards)
         -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Index that concatenates the results from several sub-indexes"]
     pub fn faiss_IndexShards_set_successive_ids(
         arg1: *mut FaissIndexShards,
         arg2: ::std::os::raw::c_int,
@@ -1767,11 +2252,14 @@ unsafe extern "C" {
         i: ::std::os::raw::c_int,
     ) -> *mut FaissIndex;
 }
+#[doc = " Index that translates search results to ids"]
 pub type FaissIndexIDMap = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " Index that translates search results to ids"]
     pub fn faiss_IndexIDMap_own_fields(arg1: *const FaissIndexIDMap) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Index that translates search results to ids"]
     pub fn faiss_IndexIDMap_set_own_fields(arg1: *mut FaissIndexIDMap, arg2: ::std::os::raw::c_int);
 }
 unsafe extern "C" {
@@ -1782,6 +2270,7 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " attempt a dynamic cast to a IDMap, thus checking\n check whether the underlying index type is `IndexIDMap`.\n\n @param index opaque pointer to index object\n @return the same pointer if the index is a IDMap index, NULL otherwise"]
     pub fn faiss_IndexIDMap_cast(arg1: *mut FaissIndex) -> *mut FaissIndexIDMap;
 }
 unsafe extern "C" {
@@ -1796,11 +2285,14 @@ unsafe extern "C" {
     #[doc = " get a pointer to the sub-index (the `index` field).\n The outputs of this function become invalid after any operation that can\n modify the index.\n\n @param index   opaque pointer to index object"]
     pub fn faiss_IndexIDMap_sub_index(index: *mut FaissIndexIDMap) -> *mut FaissIndex;
 }
+#[doc = " same as IndexIDMap but also provides an efficient reconstruction\nimplementation via a 2-way index"]
 pub type FaissIndexIDMap2 = FaissIndex_H;
 unsafe extern "C" {
+    #[doc = " same as IndexIDMap but also provides an efficient reconstruction\nimplementation via a 2-way index"]
     pub fn faiss_IndexIDMap2_own_fields(arg1: *const FaissIndexIDMap2) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " same as IndexIDMap but also provides an efficient reconstruction\nimplementation via a 2-way index"]
     pub fn faiss_IndexIDMap2_set_own_fields(
         arg1: *mut FaissIndexIDMap2,
         arg2: ::std::os::raw::c_int,
@@ -1820,6 +2312,7 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " attempt a dynamic cast to a IDMap2, thus checking\n check whether the underlying index type is `IndexIDMap`.\n\n @param index opaque pointer to index object\n @return the same pointer if the index is a IDMap2 index, NULL otherwise"]
     pub fn faiss_IndexIDMap2_cast(arg1: *mut FaissIndex) -> *mut FaissIndexIDMap2;
 }
 unsafe extern "C" {
@@ -1833,116 +2326,6 @@ unsafe extern "C" {
 unsafe extern "C" {
     #[doc = " get a pointer to the sub-index (the `index` field).\n The outputs of this function become invalid after any operation that can\n modify the index.\n\n @param index   opaque pointer to index object"]
     pub fn faiss_IndexIDMap2_sub_index(index: *mut FaissIndexIDMap2) -> *mut FaissIndex;
-}
-pub type FILE = __BindgenOpaqueArray<u64, 27usize>;
-unsafe extern "C" {
-    #[doc = " Clone an index. This is equivalent to `faiss::clone_index`"]
-    pub fn faiss_clone_index(
-        arg1: *const FaissIndex,
-        p_out: *mut *mut FaissIndex,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Clone a binary index. This is equivalent to `faiss::clone_index_binary`"]
-    pub fn faiss_clone_index_binary(
-        arg1: *const FaissIndexBinary,
-        p_out: *mut *mut FaissIndexBinary,
-    ) -> ::std::os::raw::c_int;
-}
-#[doc = " No error"]
-pub const FaissErrorCode_OK: FaissErrorCode = 0;
-#[doc = " Any exception other than Faiss or standard C++ library exceptions"]
-pub const FaissErrorCode_UNKNOWN_EXCEPT: FaissErrorCode = -1;
-#[doc = " Faiss library exception"]
-pub const FaissErrorCode_FAISS_EXCEPT: FaissErrorCode = -2;
-#[doc = " Standard C++ library exception"]
-pub const FaissErrorCode_STD_EXCEPT: FaissErrorCode = -4;
-#[doc = " An error code which depends on the exception thrown from the previous\n operation. See `faiss_get_last_error` to retrieve the error message."]
-pub type FaissErrorCode = ::std::os::raw::c_int;
-unsafe extern "C" {
-    #[doc = " Get the error message of the last failed operation performed by Faiss.\n The given pointer is only invalid until another Faiss function is\n called."]
-    pub fn faiss_get_last_error() -> *const ::std::os::raw::c_char;
-}
-unsafe extern "C" {
-    #[doc = " Build an index with the sequence of processing steps described in\n  the string."]
-    pub fn faiss_index_factory(
-        p_index: *mut *mut FaissIndex,
-        d: ::std::os::raw::c_int,
-        description: *const ::std::os::raw::c_char,
-        metric: FaissMetricType,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Build a binary index with the sequence of processing steps described in\n  the string."]
-    pub fn faiss_index_binary_factory(
-        p_index: *mut *mut FaissIndexBinary,
-        d: ::std::os::raw::c_int,
-        description: *const ::std::os::raw::c_char,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index` when a file descriptor is\n provided."]
-    pub fn faiss_write_index(idx: *const FaissIndex, f: *mut FILE) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index` when a file path is provided."]
-    pub fn faiss_write_index_fname(
-        idx: *const FaissIndex,
-        fname: *const ::std::os::raw::c_char,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index` when a file descriptor is given."]
-    pub fn faiss_read_index(
-        f: *mut FILE,
-        io_flags: ::std::os::raw::c_int,
-        p_out: *mut *mut FaissIndex,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index` when a file path is given."]
-    pub fn faiss_read_index_fname(
-        fname: *const ::std::os::raw::c_char,
-        io_flags: ::std::os::raw::c_int,
-        p_out: *mut *mut FaissIndex,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index_binary` when a file descriptor is\n provided."]
-    pub fn faiss_write_index_binary(
-        idx: *const FaissIndexBinary,
-        f: *mut FILE,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Write index to a file.\n This is equivalent to `faiss::write_index_binary` when a file path is\n provided."]
-    pub fn faiss_write_index_binary_fname(
-        idx: *const FaissIndexBinary,
-        fname: *const ::std::os::raw::c_char,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index_binary` when a file descriptor is\n given."]
-    pub fn faiss_read_index_binary(
-        f: *mut FILE,
-        io_flags: ::std::os::raw::c_int,
-        p_out: *mut *mut FaissIndexBinary,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Read index from a file.\n This is equivalent to `faiss:read_index_binary` when a file path is given."]
-    pub fn faiss_read_index_binary_fname(
-        fname: *const ::std::os::raw::c_char,
-        io_flags: ::std::os::raw::c_int,
-        p_out: *mut *mut FaissIndexBinary,
-    ) -> ::std::os::raw::c_int;
-}
-unsafe extern "C" {
-    #[doc = " Read vector transform from a file.\n This is equivalent to `faiss:read_VectorTransform` when a file path is given."]
-    pub fn faiss_read_VectorTransform_fname(
-        fname: *const ::std::os::raw::c_char,
-        p_out: *mut *mut FaissVectorTransform,
-    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     #[doc = " Compute pairwise distances between sets of vectors"]
@@ -2089,84 +2472,100 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " how should indices be stored on index types that support indices\n (anything but GpuIndexFlat*)?"]
     pub fn faiss_GpuClonerOptions_indicesOptions(
         arg1: *const FaissGpuClonerOptions,
     ) -> FaissIndicesOptions;
 }
 unsafe extern "C" {
+    #[doc = " how should indices be stored on index types that support indices\n (anything but GpuIndexFlat*)?"]
     pub fn faiss_GpuClonerOptions_set_indicesOptions(
         arg1: *mut FaissGpuClonerOptions,
         arg2: FaissIndicesOptions,
     );
 }
 unsafe extern "C" {
+    #[doc = " (boolean) is the coarse quantizer in float16?"]
     pub fn faiss_GpuClonerOptions_useFloat16CoarseQuantizer(
         arg1: *const FaissGpuClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) is the coarse quantizer in float16?"]
     pub fn faiss_GpuClonerOptions_set_useFloat16CoarseQuantizer(
         arg1: *mut FaissGpuClonerOptions,
         arg2: ::std::os::raw::c_int,
     );
 }
 unsafe extern "C" {
+    #[doc = " (boolean) for GpuIndexIVFFlat, is storage in float16?\n for GpuIndexIVFPQ, are intermediate calculations in float16?"]
     pub fn faiss_GpuClonerOptions_useFloat16(
         arg1: *const FaissGpuClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) for GpuIndexIVFFlat, is storage in float16?\n for GpuIndexIVFPQ, are intermediate calculations in float16?"]
     pub fn faiss_GpuClonerOptions_set_useFloat16(
         arg1: *mut FaissGpuClonerOptions,
         arg2: ::std::os::raw::c_int,
     );
 }
 unsafe extern "C" {
+    #[doc = " (boolean) use precomputed tables?"]
     pub fn faiss_GpuClonerOptions_usePrecomputed(
         arg1: *const FaissGpuClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) use precomputed tables?"]
     pub fn faiss_GpuClonerOptions_set_usePrecomputed(
         arg1: *mut FaissGpuClonerOptions,
         arg2: ::std::os::raw::c_int,
     );
 }
 unsafe extern "C" {
+    #[doc = " reserve vectors in the invfiles?"]
     pub fn faiss_GpuClonerOptions_reserveVecs(
         arg1: *const FaissGpuClonerOptions,
     ) -> ::std::os::raw::c_long;
 }
 unsafe extern "C" {
+    #[doc = " reserve vectors in the invfiles?"]
     pub fn faiss_GpuClonerOptions_set_reserveVecs(
         arg1: *mut FaissGpuClonerOptions,
         arg2: ::std::os::raw::c_long,
     );
 }
 unsafe extern "C" {
+    #[doc = " (boolean) For GpuIndexFlat, store data in transposed layout?"]
     pub fn faiss_GpuClonerOptions_storeTransposed(
         arg1: *const FaissGpuClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) For GpuIndexFlat, store data in transposed layout?"]
     pub fn faiss_GpuClonerOptions_set_storeTransposed(
         arg1: *mut FaissGpuClonerOptions,
         arg2: ::std::os::raw::c_int,
     );
 }
 unsafe extern "C" {
+    #[doc = " (boolean) Set verbose options on the index"]
     pub fn faiss_GpuClonerOptions_verbose(
         arg1: *const FaissGpuClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) Set verbose options on the index"]
     pub fn faiss_GpuClonerOptions_set_verbose(
         arg1: *mut FaissGpuClonerOptions,
         arg2: ::std::os::raw::c_int,
     );
 }
+#[doc = " (boolean) Set verbose options on the index"]
 pub type FaissGpuMultipleClonerOptions = FaissGpuClonerOptions_H;
 unsafe extern "C" {
+    #[doc = " (boolean) Set verbose options on the index"]
     pub fn faiss_GpuMultipleClonerOptions_free(obj: *mut FaissGpuMultipleClonerOptions);
 }
 unsafe extern "C" {
@@ -2176,22 +2575,26 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) Whether to shard the index across GPUs, versus replication\n across GPUs"]
     pub fn faiss_GpuMultipleClonerOptions_shard(
         arg1: *const FaissGpuMultipleClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " (boolean) Whether to shard the index across GPUs, versus replication\n across GPUs"]
     pub fn faiss_GpuMultipleClonerOptions_set_shard(
         arg1: *mut FaissGpuMultipleClonerOptions,
         arg2: ::std::os::raw::c_int,
     );
 }
 unsafe extern "C" {
+    #[doc = " IndexIVF::copy_subset_to subset type"]
     pub fn faiss_GpuMultipleClonerOptions_shard_type(
         arg1: *const FaissGpuMultipleClonerOptions,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " IndexIVF::copy_subset_to subset type"]
     pub fn faiss_GpuMultipleClonerOptions_set_shard_type(
         arg1: *mut FaissGpuMultipleClonerOptions,
         arg2: ::std::os::raw::c_int,
@@ -2212,8 +2615,10 @@ pub type FaissGpuIndex = FaissIndex_H;
 pub struct FaissGpuResources_H {
     _unused: [u8; 0],
 }
+#[doc = " Base class of GPU-side resource provider; hides provision of\n cuBLAS handles, CUDA streams and a temporary memory manager"]
 pub type FaissGpuResources = FaissGpuResources_H;
 unsafe extern "C" {
+    #[doc = " Base class of GPU-side resource provider; hides provision of\n cuBLAS handles, CUDA streams and a temporary memory manager"]
     pub fn faiss_GpuResources_free(obj: *mut FaissGpuResources);
 }
 unsafe extern "C" {
@@ -2352,9 +2757,12 @@ unsafe extern "C" {
         p_out: *mut *mut FaissGpuIndex,
     ) -> ::std::os::raw::c_int;
 }
+#[doc = " parameter space and setters for GPU indexes"]
 pub type FaissGpuParameterSpace = FaissParameterSpace_H;
+#[doc = " Default implementation of GpuResourcesProvider that allocates a cuBLAS\n stream and 2 streams for use, as well as temporary memory"]
 pub type FaissStandardGpuResources = FaissGpuResourcesProvider_H;
 unsafe extern "C" {
+    #[doc = " Default implementation of GpuResourcesProvider that allocates a cuBLAS\n stream and 2 streams for use, as well as temporary memory"]
     pub fn faiss_StandardGpuResources_free(obj: *mut FaissStandardGpuResources);
 }
 unsafe extern "C" {
