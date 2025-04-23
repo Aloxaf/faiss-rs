@@ -1384,6 +1384,10 @@ unsafe extern "C" {
     pub fn faiss_IndexBinaryIVF_imbalance_factor(index: *const FaissIndexBinaryIVF) -> f64;
 }
 unsafe extern "C" {
+    #[doc = " display some stats about the inverted lists of the index"]
+    pub fn faiss_IndexBinaryIVF_print_stats(index: *const FaissIndexBinaryIVF);
+}
+unsafe extern "C" {
     #[doc = " Build an index with the sequence of processing steps described in\n  the string."]
     pub fn faiss_index_factory(
         p_index: *mut *mut FaissIndex,
