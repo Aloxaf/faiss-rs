@@ -393,6 +393,18 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " query n vectors of dimension d to the index.\n\n return at most k vectors. If there are not enough results for a\n query, the result array is padded with -1s.\n\n @param index       opaque pointer to index object\n @param x           input vectors to search, size n * d\n @param labels      output labels of the NNs, size n*k\n @param distances   output pairwise distances, size n*k\n @param params      input params to modify how search is done"]
+    pub fn faiss_IndexBinary_search_with_params(
+        index: *const FaissIndexBinary,
+        n: idx_t,
+        x: *const u8,
+        k: idx_t,
+        params: *const FaissSearchParameters,
+        distances: *mut i32,
+        labels: *mut idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
     #[doc = " query n vectors of dimension d to the index.\n\n return all vectors with distance < radius. Note that many\n indexes do not implement the range_search (only the k-NN search\n is mandatory).\n\n @param index       opaque pointer to index object\n @param x           input vectors to search, size n * d\n @param radius      search radius\n @param result      result table"]
     pub fn faiss_IndexBinary_range_search(
         index: *const FaissIndexBinary,
