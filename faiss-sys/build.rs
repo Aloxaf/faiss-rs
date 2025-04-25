@@ -15,7 +15,14 @@ fn static_link_faiss() {
             "FAISS_ENABLE_GPU",
             if cfg!(feature = "gpu") { "ON" } else { "OFF" },
         )
-        .define("FAISS_OPT_LEVEL", "avx2")
+        .define(
+            "FAISS_OPT_LEVEL",
+            if cfg!(feature = "avx2") {
+                "avx2"
+            } else {
+                "generic"
+            },
+        )
         .define("FAISS_ENABLE_PYTHON", "OFF")
         .define("BUILD_TESTING", "OFF")
         .very_verbose(true);
@@ -30,8 +37,13 @@ fn static_link_faiss() {
         "cargo:rustc-link-search=native={}",
         faiss_c_location.display()
     );
-    println!("cargo:rustc-link-lib=static=faiss_c");
-    println!("cargo:rustc-link-lib=static=faiss");
+    if cfg!(feature = "avx2") {
+        println!("cargo:rustc-link-lib=static=faiss_c_avx2");
+        println!("cargo:rustc-link-lib=static=faiss_avx2");
+    } else {
+        println!("cargo:rustc-link-lib=static=faiss_c");
+        println!("cargo:rustc-link-lib=static=faiss");
+    }
     link_cxx();
     println!("cargo:rustc-link-lib=gomp");
     println!("cargo:rustc-link-lib=blas");
