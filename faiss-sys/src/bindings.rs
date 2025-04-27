@@ -345,6 +345,14 @@ unsafe extern "C" {
     pub fn faiss_IndexBinary_ntotal(arg1: *const FaissIndexBinary) -> idx_t;
 }
 unsafe extern "C" {
+    #[doc = " Getter for ntotal"]
+    pub fn faiss_IndexBinary_set_ntotal(arg1: *mut FaissIndexBinary, arg2: idx_t);
+}
+unsafe extern "C" {
+    #[doc = " Getter for code_size"]
+    pub fn faiss_IndexBinary_code_size(arg1: *const FaissIndexBinary) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
     #[doc = " Getter for metric_type"]
     pub fn faiss_IndexBinary_metric_type(arg1: *const FaissIndexBinary) -> FaissMetricType;
 }
@@ -1269,6 +1277,50 @@ unsafe extern "C" {
     #[doc = " global var that collects all statists"]
     pub fn faiss_get_indexIVF_stats() -> *mut FaissIndexIVFStats;
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissInvertedLists_H {
+    _unused: [u8; 0],
+}
+#[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
+pub type FaissOnDiskInvertedLists = FaissInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
+    pub fn faiss_OnDiskInvertedLists_free(obj: *mut FaissOnDiskInvertedLists);
+}
+#[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
+pub type FaissInvertedLists = FaissInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
+    pub fn faiss_OnDiskInvertedLists_filename(
+        arg1: *const FaissOnDiskInvertedLists,
+    ) -> *const ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
+    pub fn faiss_OnDiskInvertedLists_set_filename(
+        arg1: *mut FaissOnDiskInvertedLists,
+        arg2: *const ::std::os::raw::c_char,
+    );
+}
+unsafe extern "C" {
+    #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
+    pub fn faiss_OnDiskInvertedLists_new(
+        invlists: *mut *mut FaissOnDiskInvertedLists,
+        nlist: usize,
+        code_size: usize,
+        filename: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_OnDiskInvertedLists_merge_from_multiple(
+        invlists: *mut FaissOnDiskInvertedLists,
+        ils: *mut *const FaissInvertedLists,
+        n_il: ::std::os::raw::c_int,
+        shift_ids: ::std::os::raw::c_int,
+        verbose: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
 #[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an IndexBinary instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is stored.\n\n Otherwise the object is similar to the IndexIVF"]
 pub type FaissIndexBinaryIVF = FaissIndexBinary_H;
 unsafe extern "C" {
@@ -1311,6 +1363,19 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " whether object owns the inverted lists"]
+    pub fn faiss_IndexBinaryIVF_own_invlists(
+        arg1: *const FaissIndexBinaryIVF,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " whether object owns the inverted lists"]
+    pub fn faiss_IndexBinaryIVF_set_own_invlists(
+        arg1: *mut FaissIndexBinaryIVF,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
     #[doc = " max nb of codes to visit to do a query"]
     pub fn faiss_IndexBinaryIVF_max_codes(arg1: *const FaissIndexBinaryIVF) -> usize;
 }
@@ -1342,6 +1407,12 @@ unsafe extern "C" {
         arg1: *mut FaissIndexBinaryIVF,
         arg2: ::std::os::raw::c_int,
     );
+}
+unsafe extern "C" {
+    #[doc = " access to the inverted lists"]
+    pub fn faiss_IndexBinaryIVF_invlists(
+        arg1: *const FaissIndexBinaryIVF,
+    ) -> *mut FaissInvertedLists;
 }
 unsafe extern "C" {
     #[doc = " moves the entries from another dataset to self. On output,\n other is empty. add_id is added to all moved ids (for\n sequential ids, this would be this->ntotal"]
@@ -1377,6 +1448,13 @@ unsafe extern "C" {
     pub fn faiss_IndexBinaryIVF_make_direct_map(
         index: *mut FaissIndexBinaryIVF,
         new_maintain_direct_map: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexBinaryIVF_replace_invlists(
+        index: *mut FaissIndexBinaryIVF,
+        invlists: *mut FaissInvertedLists,
+        own: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
