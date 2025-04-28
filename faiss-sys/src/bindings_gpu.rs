@@ -1095,6 +1095,91 @@ unsafe extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissIndexBinaryFlat_H {
+    _unused: [u8; 0],
+}
+#[doc = " Index that stores the full binary vectors and performs exhaustive search"]
+pub type FaissIndexBinaryFlat = FaissIndexBinaryFlat_H;
+unsafe extern "C" {
+    #[doc = " Index that stores the full binary vectors and performs exhaustive search"]
+    pub fn faiss_IndexBinaryFlat_free(obj: *mut FaissIndexBinaryFlat);
+}
+unsafe extern "C" {
+    #[doc = " Index that stores the full binary vectors and performs exhaustive search"]
+    pub fn faiss_IndexBinaryFlat_cast(arg1: *mut FaissIndexBinary) -> *mut FaissIndexBinaryFlat;
+}
+unsafe extern "C" {
+    #[doc = " Select between using a heap or counting to select the k smallest values when\n scanning"]
+    pub fn faiss_IndexBinaryFlat_use_heap(
+        arg1: *const FaissIndexBinaryFlat,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Select between using a heap or counting to select the k smallest values when\n scanning"]
+    pub fn faiss_IndexBinaryFlat_set_use_heap(
+        arg1: *mut FaissIndexBinaryFlat,
+        arg2: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    #[doc = " Batch size for queries"]
+    pub fn faiss_IndexBinaryFlat_query_batch_size(arg1: *const FaissIndexBinaryFlat) -> usize;
+}
+unsafe extern "C" {
+    #[doc = " Batch size for queries"]
+    pub fn faiss_IndexBinaryFlat_set_query_batch_size(arg1: *mut FaissIndexBinaryFlat, arg2: usize);
+}
+unsafe extern "C" {
+    #[doc = " Build a binary flat index\n\n @param d dimensionality of the vectors"]
+    pub fn faiss_IndexBinaryFlat_new(
+        p_index: *mut *mut FaissIndexBinaryFlat,
+        d: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Get a pointer to the index's internal vector storage\n\n @param index opaque pointer to index object\n @param xb_out output pointer to the vector data (size ntotal * d / 8)"]
+    pub fn faiss_IndexBinaryFlat_xb(
+        index: *const FaissIndexBinaryFlat,
+        xb_out: *mut *mut u8,
+    ) -> ::std::os::raw::c_int;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissHNSW_H {
+    _unused: [u8; 0],
+}
+pub type FaissHNSW = FaissHNSW_H;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissIndexBinaryHNSW_H {
+    _unused: [u8; 0],
+}
+#[doc = " The HNSW index is a normal random-access index with a HNSW\n link structure built on top"]
+pub type FaissIndexBinaryHNSW = FaissIndexBinaryHNSW_H;
+unsafe extern "C" {
+    #[doc = " The HNSW index is a normal random-access index with a HNSW\n link structure built on top"]
+    pub fn faiss_IndexBinaryHNSW_free(obj: *mut FaissIndexBinaryHNSW);
+}
+unsafe extern "C" {
+    #[doc = " The HNSW index is a normal random-access index with a HNSW\n link structure built on top"]
+    pub fn faiss_IndexBinaryHNSW_cast(arg1: *mut FaissIndexBinary) -> *mut FaissIndexBinaryHNSW;
+}
+unsafe extern "C" {
+    #[doc = " the sequential storage"]
+    pub fn faiss_IndexBinaryHNSW_storage(
+        arg1: *const FaissIndexBinaryHNSW,
+    ) -> *mut FaissIndexBinary;
+}
+unsafe extern "C" {
+    #[doc = " Build IndexBinaryHNSW with an empty storage.\n\n @param d dimension of the vectors\n @param M number of neighbors per node (M)"]
+    pub fn faiss_IndexBinaryHNSW_new(
+        p_index: *mut *mut FaissIndexBinaryHNSW,
+        d: ::std::os::raw::c_int,
+        M: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
 pub type FaissSearchParametersIVF = FaissSearchParameters_H;
 unsafe extern "C" {
     pub fn faiss_SearchParametersIVF_free(obj: *mut FaissSearchParametersIVF);
@@ -1348,6 +1433,13 @@ unsafe extern "C" {
     pub fn faiss_IndexBinaryIVF_quantizer(
         arg1: *const FaissIndexBinaryIVF,
     ) -> *mut FaissIndexBinary;
+}
+unsafe extern "C" {
+    #[doc = " quantizer that maps vectors to inverted lists"]
+    pub fn faiss_IndexBinaryIVF_set_quantizer(
+        arg1: *mut FaissIndexBinaryIVF,
+        arg2: *mut FaissIndexBinary,
+    );
 }
 unsafe extern "C" {
     #[doc = " whether object owns the quantizer"]
