@@ -1367,14 +1367,110 @@ unsafe extern "C" {
 pub struct FaissInvertedLists_H {
     _unused: [u8; 0],
 }
+#[doc = " Table of inverted lists\n multithreading rules:\n - concurrent read accesses are allowed\n - concurrent update accesses are allowed\n - for resize and add_entries, only concurrent access to different lists\n   are allowed"]
+pub type FaissInvertedLists = FaissInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " Table of inverted lists\n multithreading rules:\n - concurrent read accesses are allowed\n - concurrent update accesses are allowed\n - for resize and add_entries, only concurrent access to different lists\n   are allowed"]
+    pub fn faiss_InvertedLists_free(obj: *mut FaissInvertedLists);
+}
+#[doc = " invlists that fail for all write functions"]
+pub type FaissReadOnlyInvertedLists = FaissInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " invlists that fail for all write functions"]
+    pub fn faiss_ReadOnlyInvertedLists_free(obj: *mut FaissReadOnlyInvertedLists);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FaissReadOnlyInvertedLists_H {
+    _unused: [u8; 0],
+}
+#[doc = " Horizontal stack of inverted lists"]
+pub type FaissHStackInvertedLists = FaissReadOnlyInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " Horizontal stack of inverted lists"]
+    pub fn faiss_HStackInvertedLists_free(obj: *mut FaissHStackInvertedLists);
+}
+#[doc = " vertical slice of indexes in another InvertedLists"]
+pub type FaissSliceInvertedLists = FaissReadOnlyInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " vertical slice of indexes in another InvertedLists"]
+    pub fn faiss_SliceInvertedLists_free(obj: *mut FaissSliceInvertedLists);
+}
+#[doc = " vertical slice of indexes in another InvertedLists"]
+pub type FaissVStackInvertedLists = FaissReadOnlyInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " vertical slice of indexes in another InvertedLists"]
+    pub fn faiss_VStackInvertedLists_free(obj: *mut FaissVStackInvertedLists);
+}
+#[doc = " use the first inverted lists if they are non-empty otherwise use the second\n\n This is useful if il1 has a few inverted lists that are too long,\n and that il0 has replacement lists for those, with empty lists for\n the others."]
+pub type FaissMaskedInvertedLists = FaissReadOnlyInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " use the first inverted lists if they are non-empty otherwise use the second\n\n This is useful if il1 has a few inverted lists that are too long,\n and that il0 has replacement lists for those, with empty lists for\n the others."]
+    pub fn faiss_MaskedInvertedLists_free(obj: *mut FaissMaskedInvertedLists);
+}
+#[doc = " if the inverted list in il is smaller than maxsize then return it,\n  otherwise return an empty invlist"]
+pub type FaissStopWordsInvertedLists = FaissReadOnlyInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " if the inverted list in il is smaller than maxsize then return it,\n  otherwise return an empty invlist"]
+    pub fn faiss_StopWordsInvertedLists_free(obj: *mut FaissStopWordsInvertedLists);
+}
+#[doc = " if the inverted list in il is smaller than maxsize then return it,\n  otherwise return an empty invlist"]
+pub type FaissArrayInvertedLists = FaissInvertedLists_H;
+unsafe extern "C" {
+    #[doc = " if the inverted list in il is smaller than maxsize then return it,\n  otherwise return an empty invlist"]
+    pub fn faiss_ArrayInvertedLists_free(obj: *mut FaissArrayInvertedLists);
+}
+unsafe extern "C" {
+    #[doc = " if the inverted list in il is smaller than maxsize then return it,\n  otherwise return an empty invlist"]
+    pub fn faiss_ArrayInvertedLists_new(
+        p_invlists: *mut *mut FaissArrayInvertedLists,
+        nlist: usize,
+        code_size: usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_HStackInvertedLists_new(
+        p_invlists: *mut *mut FaissHStackInvertedLists,
+        nil: ::std::os::raw::c_int,
+        ils: *mut *const FaissInvertedLists,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_SliceInvertedLists_new(
+        p_invlists: *mut *mut FaissSliceInvertedLists,
+        il: *const FaissInvertedLists,
+        i0: idx_t,
+        i1: idx_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_VStackInvertedLists_new(
+        p_invlists: *mut *mut FaissVStackInvertedLists,
+        nil: ::std::os::raw::c_int,
+        ils: *mut *const FaissInvertedLists,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_MaskedInvertedLists_new(
+        p_invlists: *mut *mut FaissMaskedInvertedLists,
+        il0: *const FaissInvertedLists,
+        il1: *const FaissInvertedLists,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_StopWordsInvertedLists_new(
+        p_invlists: *mut *mut FaissStopWordsInvertedLists,
+        il: *const FaissInvertedLists,
+        maxsize: usize,
+    ) -> ::std::os::raw::c_int;
+}
+pub type FaissConcatenatedInvertedLists = FaissHStackInvertedLists;
 #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
 pub type FaissOnDiskInvertedLists = FaissInvertedLists_H;
 unsafe extern "C" {
     #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
     pub fn faiss_OnDiskInvertedLists_free(obj: *mut FaissOnDiskInvertedLists);
 }
-#[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
-pub type FaissInvertedLists = FaissInvertedLists_H;
 unsafe extern "C" {
     #[doc = " On-disk storage of inverted lists.\n\n The data is stored in a mmapped chunk of memory (base pointer ptr,\n size totsize). Each list is a range of memory that contains (object\n List) that contains:\n\n - uint8_t codes[capacity * code_size]\n - followed by idx_t ids[capacity]\n\n in each of the arrays, the size <= capacity first elements are\n used, the rest is not initialized.\n\n Addition and resize are supported by:\n - roundind up the capacity of the lists to a power of two\n - maintaining a list of empty slots, sorted by size.\n - resizing the mmapped block is adjusted as needed.\n\n An OnDiskInvertedLists is compact if the size == capacity for all\n lists and there are no available slots.\n\n Addition to the invlists is slow. For incremental add it is better\n to use a default ArrayInvertedLists object and convert it to an\n OnDisk with merge_from.\n\n When it is known that a set of lists will be accessed, it is useful\n to call prefetch_lists, that launches a set of threads to read the\n lists in parallel."]
     pub fn faiss_OnDiskInvertedLists_filename(
