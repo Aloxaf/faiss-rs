@@ -1373,6 +1373,16 @@ unsafe extern "C" {
     #[doc = " Table of inverted lists\n multithreading rules:\n - concurrent read accesses are allowed\n - concurrent update accesses are allowed\n - for resize and add_entries, only concurrent access to different lists\n   are allowed"]
     pub fn faiss_InvertedLists_free(obj: *mut FaissInvertedLists);
 }
+unsafe extern "C" {
+    #[doc = " Table of inverted lists\n multithreading rules:\n - concurrent read accesses are allowed\n - concurrent update accesses are allowed\n - for resize and add_entries, only concurrent access to different lists\n   are allowed"]
+    pub fn faiss_InvertedLists_add_entries(
+        invlists: *mut FaissInvertedLists,
+        list_no: usize,
+        n_entry: usize,
+        ids_in: *const idx_t,
+        codes: *const u8,
+    ) -> ::std::os::raw::c_int;
+}
 #[doc = " invlists that fail for all write functions"]
 pub type FaissReadOnlyInvertedLists = FaissInvertedLists_H;
 unsafe extern "C" {
@@ -1652,6 +1662,20 @@ unsafe extern "C" {
 unsafe extern "C" {
     #[doc = " display some stats about the inverted lists of the index"]
     pub fn faiss_IndexBinaryIVF_print_stats(index: *const FaissIndexBinaryIVF);
+}
+unsafe extern "C" {
+    pub fn faiss_IndexBinaryIVF_invlists_get_codes(
+        index: *const FaissIndexBinaryIVF,
+        list_no: usize,
+        codes: *mut u8,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_IndexBinaryIVF_invlists_get_ids(
+        index: *const FaissIndexBinaryIVF,
+        list_no: usize,
+        ids: *mut idx_t,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     #[doc = " Build an index with the sequence of processing steps described in\n  the string."]
