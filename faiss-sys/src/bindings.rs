@@ -1145,12 +1145,43 @@ unsafe extern "C" {
         xb_out: *mut *mut u8,
     ) -> ::std::os::raw::c_int;
 }
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct FaissHNSW_H {
-    _unused: [u8; 0],
+pub type FaissSearchParametersHNSW = FaissSearchParameters_H;
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_free(obj: *mut FaissSearchParametersHNSW);
 }
-pub type FaissHNSW = FaissHNSW_H;
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_cast(
+        arg1: *mut FaissSearchParameters,
+    ) -> *mut FaissSearchParametersHNSW;
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_new(
+        p_sp: *mut *mut FaissSearchParametersHNSW,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_new_with(
+        p_sp: *mut *mut FaissSearchParametersHNSW,
+        sel: *mut FaissIDSelector,
+        efSearch: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_sel(
+        arg1: *const FaissSearchParametersHNSW,
+    ) -> *const FaissIDSelector;
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_efSearch(
+        arg1: *const FaissSearchParametersHNSW,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersHNSW_set_efSearch(
+        arg1: *mut FaissSearchParametersHNSW,
+        arg2: ::std::os::raw::c_int,
+    );
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct FaissIndexBinaryHNSW_H {
@@ -1200,6 +1231,7 @@ unsafe extern "C" {
         sel: *mut FaissIDSelector,
         nprobe: usize,
         max_codes: usize,
+        quantizer_params: *mut FaissSearchParameters,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
@@ -1220,6 +1252,17 @@ unsafe extern "C" {
     pub fn faiss_SearchParametersIVF_set_max_codes(
         arg1: *mut FaissSearchParametersIVF,
         arg2: usize,
+    );
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersIVF_quantizer_params(
+        arg1: *const FaissSearchParametersIVF,
+    ) -> *mut FaissSearchParameters;
+}
+unsafe extern "C" {
+    pub fn faiss_SearchParametersIVF_set_quantizer_params(
+        arg1: *mut FaissSearchParametersIVF,
+        arg2: *mut FaissSearchParameters,
     );
 }
 #[doc = " Index based on a inverted file (IVF)\n\n In the inverted file, the quantizer (an Index instance) provides a\n quantization index for each vector to be added. The quantization\n index maps to a list (aka inverted list or posting list), where the\n id of the vector is then stored.\n\n At search time, the vector to be searched is also quantized, and\n only the list corresponding to the quantization index is\n searched. This speeds up the search by making it\n non-exhaustive. This can be relaxed using multi-probe search: a few\n (nprobe) quantization indices are selected and several inverted\n lists are visited.\n\n Sub-classes implement a post-filtering of the index that refines\n the distance estimation from the query to database vectors."]
