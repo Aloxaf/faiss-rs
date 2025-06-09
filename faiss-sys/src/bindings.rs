@@ -1217,6 +1217,12 @@ unsafe extern "C" {
         efSearch: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
+unsafe extern "C" {
+    pub fn faiss_IndexBinaryHNSW_set_efConstruction(
+        index: *mut FaissIndexBinaryHNSW,
+        efConstruction: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
 pub type FaissSearchParametersIVF = FaissSearchParameters_H;
 unsafe extern "C" {
     pub fn faiss_SearchParametersIVF_free(obj: *mut FaissSearchParametersIVF);
