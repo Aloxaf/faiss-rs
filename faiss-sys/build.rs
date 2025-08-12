@@ -17,7 +17,11 @@ fn static_link_faiss() {
         )
         .define(
             "FAISS_OPT_LEVEL",
-            if cfg!(feature = "avx2") {
+            if cfg!(target_feature = "avx512vpopcntdq") {
+                "avx512_spr"
+            } else if cfg!(target_feature = "avx512f") {
+                "avx512"
+            } else if cfg!(target_feature = "avx2") {
                 "avx2"
             } else {
                 "generic"
@@ -37,7 +41,13 @@ fn static_link_faiss() {
         "cargo:rustc-link-search=native={}",
         faiss_c_location.display()
     );
-    if cfg!(feature = "avx2") {
+    if cfg!(target_feature = "avx512vpopcntdq") {
+        println!("cargo:rustc-link-lib=static=faiss_c_avx512_spr");
+        println!("cargo:rustc-link-lib=static=faiss_avx512_spr");
+    } else if cfg!(target_feature = "avx512f") {
+        println!("cargo:rustc-link-lib=static=faiss_c_avx512");
+        println!("cargo:rustc-link-lib=static=faiss_avx512");
+    } else if cfg!(target_feature = "avx2") {
         println!("cargo:rustc-link-lib=static=faiss_c_avx2");
         println!("cargo:rustc-link-lib=static=faiss_avx2");
     } else {
